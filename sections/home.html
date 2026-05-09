@@ -1,17 +1,132 @@
+        <!-- Aurora background layers -->
+        <div class="hero-aurora">
+          <div class="aurora-orb aurora-1"></div>
+          <div class="aurora-orb aurora-2"></div>
+          <div class="aurora-orb aurora-3"></div>
+        </div>
+
+        <!-- Floating grid overlay -->
+        <div class="hero-grid-overlay"></div>
+
+        <!-- Cursor glow -->
+        <div class="cursor-glow" id="cursor-glow"></div>
+
         <div class="hero-wrap">
-          <div>
-            <p class="hero-greeting">Hello! I'm</p>
+          <!-- Left: Text content -->
+          <div class="hero-left" id="hero-left">
+            <div class="hero-eyebrow reveal-hero">
+              <span class="eyebrow-dot"></span>
+              <span>Available for opportunities</span>
+              <span class="eyebrow-dot"></span>
+            </div>
+
             <h1 class="hero-name">
-              <span>TUSHAR</span> <span>BHATT</span>
+              <span class="name-line" id="hero-line-1">TUSHAR</span>
+              <span class="name-line name-line-2" id="hero-line-2">BHATT</span>
             </h1>
-            <div class="hero-tw">
-              <span class="prefix">I am </span><span class="typed" id="typed-text"></span><span class="cursor">|</span>
+
+            <div class="hero-descriptor reveal-hero">
+              <span class="prefix">I build </span>
+              <span class="typed-wrapper">
+                <span class="typed" id="typed-text"></span>
+                <span class="cursor">_</span>
+              </span>
             </div>
-            <div class="hero-actions">
-              <a class="btn primary" href="#work">View Work</a><a class="btn" href="#contact">Contact</a>
+
+            <p class="hero-bio reveal-hero">
+              Full Stack Developer · AI/ML Engineer · Problem Solver<br>
+              Crafting digital experiences that are fast, intelligent, and beautiful.
+            </p>
+
+            <div class="hero-actions reveal-hero">
+              <a class="btn primary magnetic" href="#work" id="btn-work">
+                <span class="btn-bg"></span>
+                <span class="btn-text">View My Work</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a class="btn secondary magnetic" href="#contact" id="btn-contact">
+                <span class="btn-text">Let's Talk</span>
+              </a>
+            </div>
+
+            <!-- Floating tech badges -->
+            <div class="tech-badges reveal-hero">
+              <div class="badge float-a">React</div>
+              <div class="badge float-b">Python</div>
+              <div class="badge float-c">AI / ML</div>
+              <div class="badge float-d">Node.js</div>
             </div>
           </div>
-          <div class="hero-stage">
-            <div class="hero-card"><canvas id="orb-canvas"></canvas></div>
+
+          <!-- Right: Visual stage -->
+          <div class="hero-stage" id="hero-stage">
+            <!-- Holographic card -->
+            <div class="holo-card" id="holo-card">
+              <div class="holo-card-inner">
+                <!-- Scanlines -->
+                <div class="scanlines"></div>
+
+                <!-- Canvas orb -->
+                <canvas id="orb-canvas"></canvas>
+
+                <!-- Corner accents -->
+                <div class="corner-accent ca-tl"></div>
+                <div class="corner-accent ca-tr"></div>
+                <div class="corner-accent ca-bl"></div>
+                <div class="corner-accent ca-br"></div>
+
+                <!-- HUD labels -->
+                <div class="hud-label hud-tl">
+                  <span class="hud-key">STATUS</span>
+                  <span class="hud-val hud-live">ONLINE</span>
+                </div>
+                <div class="hud-label hud-br">
+                  <span class="hud-key">BUILD</span>
+                  <span class="hud-val">v2.6.0</span>
+                </div>
+
+                <!-- Data streams -->
+                <div class="data-stream ds-left">
+                  <div class="ds-item">FULL_STACK=true</div>
+                  <div class="ds-item">AI_ML=active</div>
+                  <div class="ds-item">BOTS=enabled</div>
+                  <div class="ds-item">LEETCODE=100+</div>
+                  <div class="ds-item">GPA=8.5</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating orbit elements -->
+            <div class="orbit-ring orbit-ring-1"></div>
+            <div class="orbit-ring orbit-ring-2"></div>
+
+            <!-- Floating stat chips -->
+            <div class="stat-chip chip-1">
+              <span class="chip-icon">⚡</span>
+              <div>
+                <div class="chip-num">3+</div>
+                <div class="chip-lbl">Projects</div>
+              </div>
+            </div>
+            <div class="stat-chip chip-2">
+              <span class="chip-icon">🏆</span>
+              <div>
+                <div class="chip-num">8.5</div>
+                <div class="chip-lbl">GPA / AKTU</div>
+              </div>
+            </div>
+            <div class="stat-chip chip-3">
+              <span class="chip-icon">🧠</span>
+              <div>
+                <div class="chip-num">100+</div>
+                <div class="chip-lbl">LeetCode</div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- Scroll hint -->
+        <div class="scroll-hint reveal-hero">
+          <div class="scroll-line"></div>
+          <span>SCROLL</span>
         </div>

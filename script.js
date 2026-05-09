@@ -29,118 +29,224 @@
         });
       }
       function initLoader() {
-        const c = $("#loader-canvas"),
-          r = new THREE.WebGLRenderer({
-            canvas: c,
-            alpha: true,
-            antialias: true,
-          }),
-          s = new THREE.Scene(),
-          cam = new THREE.PerspectiveCamera(
-            42,
-            innerWidth / innerHeight,
-            0.1,
-            80,
-          );
-        cam.position.z = 6;
-        s.add(new THREE.AmbientLight(0xffffff, 0.45));
-        const l = new THREE.PointLight(0x00ffb2, 3, 12);
-        l.position.set(2, 2, 4);
-        s.add(l);
+        const c = $("#loader-canvas");
+        if (!c) return;
+        const r = new THREE.WebGLRenderer({ canvas: c, alpha: true, antialias: true });
+        r.setPixelRatio(Math.min(devicePixelRatio, 1.8));
+        const s = new THREE.Scene();
+        const cam = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 120);
+        cam.position.z = 7;
+
+        // Lighting
+        s.add(new THREE.AmbientLight(0x0a0a1a, 1.2));
+        const lGreen = new THREE.PointLight(0x00ffb2, 4, 14);
+        lGreen.position.set(2, 2, 4);
+        s.add(lGreen);
+        const lPurple = new THREE.PointLight(0x8f5cff, 3, 14);
+        lPurple.position.set(-3, -1, 3);
+        s.add(lPurple);
+        const lCyan = new THREE.PointLight(0x4cc9ff, 2, 12);
+        lCyan.position.set(0, 3, -2);
+        s.add(lCyan);
+
+        // Central AI core group
         const atom = new THREE.Group();
         s.add(atom);
-        const mat = liquidMat(),
-          core = new THREE.Mesh(new THREE.SphereGeometry(0.62, 64, 64), mat);
+
+        // Core liquid sphere
+        const coreMat = liquidMat();
+        const core = new THREE.Mesh(new THREE.SphereGeometry(0.58, 80, 80), coreMat);
         atom.add(core);
-        atom.add(
-          new THREE.Mesh(
-            new THREE.SphereGeometry(0.69, 32, 32),
-            new THREE.MeshPhysicalMaterial({
-              color: 0xffffff,
-              roughness: 0.02,
-              metalness: 0.1,
-              transmission: 0.85,
-              transparent: true,
-              opacity: 0.22,
-            }),
-          ),
-        );
-        const rings = [];
-        [
-          [0, 0, 0x00ffb2],
-          [Math.PI / 3, 0.4, 0x4cc9ff],
-          [-Math.PI / 3, -0.6, 0x8f5cff],
-        ].forEach((a) => {
+
+        // Glass shell
+        atom.add(new THREE.Mesh(
+          new THREE.SphereGeometry(0.65, 48, 48),
+          new THREE.MeshPhysicalMaterial({
+            color: 0xffffff, roughness: 0.0, metalness: 0.05,
+            transmission: 0.88, transparent: true, opacity: 0.18,
+          })
+        ));
+
+        // Orbital rings - 5 rings at varied angles
+        const ringDefs = [
+          { rx: 0,              ry: 0,    color: 0x00ffb2, op: 0.9, r: 1.7,  tube: 0.009, sp: 0.010 },
+          { rx: Math.PI/3,     ry: 0.3,  color: 0x4cc9ff, op: 0.8, r: 1.9,  tube: 0.007, sp: 0.007 },
+          { rx: -Math.PI/3,    ry: -0.5, color: 0x8f5cff, op: 0.7, r: 2.1,  tube: 0.007, sp: -0.009 },
+          { rx: Math.PI/2,     ry: 0.8,  color: 0x00ffb2, op: 0.4, r: 2.4,  tube: 0.005, sp: 0.005 },
+          { rx: -Math.PI/6,    ry: 1.2,  color: 0x4cc9ff, op: 0.35,r: 2.65, tube: 0.004, sp: -0.006 },
+        ];
+        const rings = ringDefs.map(d => {
           const ring = new THREE.Mesh(
-            new THREE.TorusGeometry(1.75, 0.012, 12, 160),
-            new THREE.MeshBasicMaterial({
-              color: a[2],
-              transparent: true,
-              opacity: 0.82,
-            }),
+            new THREE.TorusGeometry(d.r, d.tube, 16, 200),
+            new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: d.op })
           );
-          ring.rotation.set(a[0], a[1], 0);
+          ring.rotation.set(d.rx, d.ry, 0);
+          ring.userData.sp = d.sp;
           atom.add(ring);
-          rings.push(ring);
+          return ring;
         });
-        const es = rings.map((ring, i) => {
+
+        // Orbiting electron dots
+        const electrons = rings.slice(0, 3).map((ring, i) => {
           const e = new THREE.Mesh(
-            new THREE.SphereGeometry(0.075, 16, 16),
-            new THREE.MeshBasicMaterial({ color: 0xffffff }),
+            new THREE.SphereGeometry(0.055, 12, 12),
+            new THREE.MeshBasicMaterial({ color: 0xffffff })
           );
+          e.userData = { ring, angle: i * 2.1, speed: 0.025 + i * 0.008 };
           s.add(e);
-          return { e, ring, a: i * 2.1, sp: 0.028 + i * 0.006 };
+          return e;
         });
-        let p = 0,
-          done = false;
+
+        // Floating depth particles
+        const PARTICLES = 280;
+        const pPos = new Float32Array(PARTICLES * 3);
+        const pSizes = new Float32Array(PARTICLES);
+        for (let i = 0; i < PARTICLES; i++) {
+          pPos[i*3]   = (Math.random()-0.5) * 18;
+          pPos[i*3+1] = (Math.random()-0.5) * 12;
+          pPos[i*3+2] = (Math.random()-0.5) * 14;
+          pSizes[i] = Math.random() * 2.5 + 0.5;
+        }
+        const pGeo = new THREE.BufferGeometry();
+        pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+        pGeo.setAttribute("size", new THREE.BufferAttribute(pSizes, 1));
+        const pMat = new THREE.PointsMaterial({
+          size: 0.04, color: 0x4cc9ff, transparent: true, opacity: 0.5,
+          sizeAttenuation: true,
+        });
+        s.add(new THREE.Points(pGeo, pMat));
+
         fitRenderer(r, c, cam);
         addEventListener("resize", () => fitRenderer(r, c, cam));
+
+        // AI status messages
+        const statusEl = $("#ldr-status");
+        const messages = [
+          "Initializing Neural Interface",
+          "Loading Interactive Systems",
+          "Preparing Experience",
+          "Synchronizing Portfolio",
+          "Entering Workspace",
+        ];
+        let msgIdx = 0;
+        function cycleMsg() {
+          if (!statusEl) return;
+          statusEl.classList.add("fading");
+          setTimeout(() => {
+            msgIdx = (msgIdx + 1) % messages.length;
+            statusEl.textContent = messages[msgIdx];
+            statusEl.classList.remove("fading");
+          }, 320);
+        }
+        const msgTimer = setInterval(cycleMsg, 2200);
+
+        // Live HUD data animation
+        const hudVals = $$(".ldr-hud-val");
+        function rndHud() {
+          const vals = [
+            Math.floor(Math.random()*60+20)+"%",
+            Math.floor(Math.random()*40+30)+"%",
+            Math.floor(Math.random()*80+10)+"%",
+            Math.floor(Math.random()*40+10)+"ms",
+            Math.floor(Math.random()*40+30)+"ms",
+            Math.floor(Math.random()*30+50)+"fps",
+            Math.floor(Math.random()*200+100)+"mb",
+          ];
+          hudVals.forEach((el, i) => { if (vals[i] !== undefined) el.textContent = vals[i]; });
+        }
+        rndHud();
+        const hudTimer = setInterval(rndHud, 800);
+
+        // Mouse parallax
+        let mx = 0, my = 0, targetMx = 0, targetMy = 0;
+        document.addEventListener("mousemove", e => {
+          targetMx = (e.clientX / innerWidth - 0.5) * 2;
+          targetMy = (e.clientY / innerHeight - 0.5) * 2;
+        });
+
+        let p = 0, done = false;
         const start = performance.now();
         function loop(t) {
           if (done) return;
           requestAnimationFrame(loop);
           const time = (t - start) / 1000;
-          mat.uniforms.uTime.value = time;
-          atom.rotation.y += 0.008;
-          atom.rotation.x = Math.sin(time * 0.8) * 0.12;
-          rings.forEach((ring, i) => {
-            ring.rotation.z += 0.008 + i * 0.003;
-            ring.rotation.y += 0.003;
+
+          // Smooth mouse parallax on camera
+          mx += (targetMx - mx) * 0.04;
+          my += (targetMy - my) * 0.04;
+          cam.position.x = mx * 0.5;
+          cam.position.y = -my * 0.3;
+          cam.lookAt(0, 0, 0);
+
+          // Core animation
+          coreMat.uniforms.uTime.value = time;
+          atom.rotation.y += 0.006;
+          atom.rotation.x = Math.sin(time * 0.7) * 0.1;
+          atom.position.y = Math.sin(time * 0.9) * 0.06;
+
+          // Individual ring rotations
+          rings.forEach(ring => {
+            ring.rotation.z += ring.userData.sp;
+            ring.rotation.x += ring.userData.sp * 0.3;
           });
-          es.forEach((o) => {
-            o.a += o.sp;
+
+          // Electron orbits
+          electrons.forEach(e => {
+            e.userData.angle += e.userData.speed;
             const pos = new THREE.Vector3(
-              Math.cos(o.a) * 1.75,
-              Math.sin(o.a) * 1.75,
-              0,
+              Math.cos(e.userData.angle) * e.userData.ring.geometry.parameters.radius,
+              Math.sin(e.userData.angle) * e.userData.ring.geometry.parameters.radius,
+              0
             );
-            o.ring.localToWorld(pos);
-            o.e.position.copy(pos);
+            e.userData.ring.localToWorld(pos);
+            e.position.copy(pos);
           });
-          p = Math.min(
-            100,
-            p + (prefersReduced ? 6 : 0.55 + Math.random() * 1.1),
-          );
-          $("#loader-pct").textContent = Math.floor(p) + "%";
-          $("#loader-bar").style.width = p + "%";
-          if (p >= 100) {
+
+          // Particle slow drift
+          const pArr = pGeo.attributes.position.array;
+          for (let i = 1; i < PARTICLES * 3; i += 3) {
+            pArr[i] += 0.003;
+            if (pArr[i] > 6) pArr[i] = -6;
+          }
+          pGeo.attributes.position.needsUpdate = true;
+
+          // Point light pulse
+          lGreen.intensity = 3 + Math.sin(time * 2.3) * 1.2;
+          lPurple.intensity = 2.5 + Math.sin(time * 1.7 + 1) * 1;
+
+          // Progress
+          p = Math.min(100, p + (prefersReduced ? 6 : 0.55 + Math.random() * 1.1));
+          const pctEl = $("#loader-pct"), barEl = $("#loader-bar");
+          if (pctEl) pctEl.textContent = Math.floor(p) + "%";
+          if (barEl) barEl.style.width = p + "%";
+
+          if (p >= 100 && !done) {
             done = true;
+            clearInterval(msgTimer);
+            clearInterval(hudTimer);
+            if (statusEl) { statusEl.classList.add("fading"); }
             setTimeout(() => {
-              gsap.to("#loader", {
-                opacity: 0,
-                duration: 0.55,
-                onComplete() {
-                  document.body.classList.remove("locked");
-                  $("#loader").style.display = "none";
-                  startIntro();
-                },
-              });
-            }, 260);
+              // Cinematic exit: blur + scale zoom + fade
+              const loader = $("#loader");
+              if (loader) {
+                loader.style.transition = "opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease";
+                loader.style.filter = "blur(12px)";
+                loader.style.transform = "scale(1.06)";
+                loader.style.opacity = "0";
+              }
+              setTimeout(() => {
+                document.body.classList.remove("locked");
+                if (loader) loader.style.display = "none";
+                r.dispose();
+                startIntro();
+              }, 950);
+            }, 400);
           }
           r.render(s, cam);
         }
         requestAnimationFrame(loop);
       }
+
       function initBg() {
         const c = $("#bg-canvas"),
           r = new THREE.WebGLRenderer({
@@ -413,6 +519,9 @@
             a.classList.toggle("active", r.top < 150 && r.bottom > 150);
           });
         });
+
+        // Upgraded reveal observer
+        const revealEls = [".reveal", ".sec-eyebrow", ".sec-heading", ".journey", ".about-text-col"];
         const io = new IntersectionObserver(
           (es) =>
             es.forEach((e) => {
@@ -420,26 +529,64 @@
                 gsap.to(e.target, {
                   opacity: 1,
                   y: 0,
-                  duration: 0.8,
+                  x: 0,
+                  duration: 0.85,
                   ease: "power3.out",
                 });
                 io.unobserve(e.target);
               }
             }),
-          { threshold: 0.13 },
+          { threshold: 0.1 },
         );
-        $$(".reveal").forEach((el) => io.observe(el));
+        revealEls.forEach(sel => $$(sel).forEach((el) => io.observe(el)));
+
+        // Animated counters
+        const counterObs = new IntersectionObserver((es) =>
+          es.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseFloat(el.dataset.target);
+            const isDecimal = el.dataset.decimal === "1";
+            const duration = 1800;
+            const start = performance.now();
+            function update(now) {
+              const t = Math.min((now - start) / duration, 1);
+              const val = t * target;
+              el.textContent = isDecimal ? val.toFixed(1) : Math.floor(val);
+              if (t < 1) requestAnimationFrame(update);
+              else el.textContent = isDecimal ? target.toFixed(1) : target;
+            }
+            requestAnimationFrame(update);
+            counterObs.unobserve(el);
+          }), { threshold: 0.5 }
+        );
+        $$(".counter").forEach(el => counterObs.observe(el));
+
+        // Carousel
         let idx = 0;
         const slides = $("#cslides"),
           dots = $$(".cdot");
         function go(n) {
           idx = (n + 3) % 3;
-          slides.style.transform = "translateX(-" + idx * 100 + "%)";
+          if (slides) slides.style.transform = "translateX(-" + idx * 100 + "%)";
           dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+          // Sync project nav
+          $$(".proj-nav-item").forEach((item, i) => {
+            item.classList.toggle("active", i === idx);
+          });
         }
-        $("#cprev").onclick = () => go(idx - 1);
-        $("#cnext").onclick = () => go(idx + 1);
+        const prevBtn = $("#cprev"), nextBtn = $("#cnext");
+        if (prevBtn) prevBtn.onclick = () => go(idx - 1);
+        if (nextBtn) nextBtn.onclick = () => go(idx + 1);
         dots.forEach((d) => (d.onclick = () => go(+d.dataset.i)));
+
+        // Project nav click
+        $$(".proj-nav-item").forEach((item) => {
+          item.addEventListener("click", () => {
+            go(+item.dataset.proj);
+          });
+        });
+
         window.toggleAcc = (id) => {
           const el = $("#" + id),
             was = el.classList.contains("open");
@@ -505,26 +652,83 @@
         tick();
       }
       function startIntro() {
-        gsap.to(".hero-greeting", { opacity: 1, y: 0, duration: 0.7 });
-        gsap.to(".hero-name", {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          delay: 0.1,
-          ease: "power3.out",
-        });
-        gsap.to(".hero-tw", { opacity: 1, y: 0, duration: 0.7, delay: 0.28 });
-        gsap.to(".hero-actions", {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          delay: 0.42,
+        // Staggered reveal sequence
+        const tl = [
+          { sel: ".hero-eyebrow", delay: 0 },
+          { sel: ".hero-name", delay: 0.15 },
+          { sel: ".hero-descriptor", delay: 0.3 },
+          { sel: ".hero-bio", delay: 0.42 },
+          { sel: ".hero-actions", delay: 0.54 },
+          { sel: ".tech-badges", delay: 0.66 },
+          { sel: ".hero-stage", delay: 0.2, x: false },
+          { sel: ".scroll-hint", delay: 1.2 },
+        ];
+        tl.forEach(({ sel, delay, x }) => {
+          const el = $(sel);
+          if (!el) return;
+          if (x === false) {
+            gsap.to(el, { opacity: 1, x: 0, duration: 1, delay, ease: "power3.out" });
+          } else {
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.85, delay, ease: "power3.out" });
+          }
         });
         initTypewriter();
+        initHeroInteractions();
       }
+
+      function initHeroInteractions() {
+        const glow = $("#cursor-glow");
+        const card = $("#holo-card");
+
+        // Cursor glow tracking
+        if (glow) {
+          document.addEventListener("mousemove", (e) => {
+            glow.style.left = e.clientX + "px";
+            glow.style.top = e.clientY + "px";
+          });
+        }
+
+        // 3D tilt on holographic card
+        if (card) {
+          card.addEventListener("mousemove", (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+          });
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)";
+          });
+        }
+
+        // Magnetic button effect
+        $$(".magnetic").forEach((btn) => {
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top - r.height / 2;
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+          });
+          btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "translate(0, 0)";
+          });
+        });
+
+        // Parallax on hero left content
+        const heroLeft = $("#hero-left");
+        if (heroLeft && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.addEventListener("mousemove", (e) => {
+            const x = (e.clientX / innerWidth - 0.5) * 12;
+            const y = (e.clientY / innerHeight - 0.5) * 6;
+            heroLeft.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+          });
+        }
+      }
+
       initLoader();
       initBg();
       initOrb();
       initSkillsScene();
       initRain();
       initUI();
+

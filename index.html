@@ -20,16 +20,7 @@
     <div id="sp"></div>
     <canvas id="bg-canvas"></canvas>
     <div class="noise"></div>
-    <div id="loader">
-      <div class="loader-grid"></div>
-      <canvas id="loader-canvas"></canvas>
-      <div class="loader-copy">
-        <div class="loader-mark">TB</div>
-        <div id="loader-name">Tushar Bhatt</div>
-        <div class="loader-meter"><span id="loader-bar"></span></div>
-        <div id="loader-pct">0%</div>
-      </div>
-    </div>
+    <div id="loader"></div>
     <nav id="navbar">
       <a class="nav-logo" href="#home">TB</a>
       <ul class="nav-links">
@@ -114,6 +105,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       async function loadSections() {
+        // Load loader first so it's visible immediately
+        const loaderRes = await fetch('sections/loading.html');
+        document.getElementById('loader').innerHTML = await loaderRes.text();
+        // Load content sections
         const sections = ['home', 'about', 'skills', 'work', 'certificates', 'contact'];
         for (const s of sections) {
           const res = await fetch(`sections/${s}.html`);
