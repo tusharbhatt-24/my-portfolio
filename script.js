@@ -3,12 +3,137 @@
       ).matches;
       const $ = (s) => document.querySelector(s),
         $$ = (s) => Array.from(document.querySelectorAll(s));
-      function fitRenderer(r, c, cam) {
+      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const perfProfile = (() => {
+        const memory = navigator.deviceMemory || 8;
+        const cores = navigator.hardwareConcurrency || 8;
+        const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+        return {
+          constrained:
+            prefersReduced ||
+            memory <= 4 ||
+            cores <= 4 ||
+            (coarsePointer && (window.devicePixelRatio || 1) > 2),
+        };
+      })();
+      const rendererBase = (antialias) => ({
+        alpha: true,
+        antialias,
+        stencil: false,
+        preserveDrawingBuffer: false,
+        powerPreference: perfProfile.constrained ? "low-power" : "high-performance",
+      });
+      const maxDpr = (cap = 1.6) =>
+        Math.min(window.devicePixelRatio || 1, perfProfile.constrained ? Math.min(cap, 1.25) : cap);
+      const passive = { passive: true };
+      function rafThrottle(fn) {
+        let frame = 0;
+        let lastArgs;
+        return (...args) => {
+          lastArgs = args;
+          if (frame) return;
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            fn(...lastArgs);
+          });
+        };
+      }
+      function createRafLoop(step, { pauseWhenHidden = true } = {}) {
+        let frame = 0;
+        let active = true;
+        const canRun = () => active && (!pauseWhenHidden || !document.hidden);
+        const tick = (t) => {
+          frame = 0;
+          if (!canRun()) return;
+          step(t);
+          if (canRun()) frame = requestAnimationFrame(tick);
+        };
+        const start = () => {
+          if (!frame && canRun()) frame = requestAnimationFrame(tick);
+        };
+        const stop = () => {
+          if (frame) cancelAnimationFrame(frame);
+          frame = 0;
+        };
+        const onVis = () => (document.hidden ? stop() : start());
+        if (pauseWhenHidden) document.addEventListener("visibilitychange", onVis, passive);
+        return {
+          start,
+          stop,
+          setActive(value) {
+            active = value;
+            value ? start() : stop();
+          },
+          destroy() {
+            active = false;
+            stop();
+            if (pauseWhenHidden) document.removeEventListener("visibilitychange", onVis);
+          },
+        };
+      }
+      function nearViewport(el, margin = 320) {
+        const r = el.getBoundingClientRect();
+        return r.bottom >= -margin && r.top <= innerHeight + margin && r.right >= -margin && r.left <= innerWidth + margin;
+      }
+      function watchVisibility(el, onChange, rootMargin = "320px") {
+        if (!("IntersectionObserver" in window)) {
+          onChange(true);
+          return () => {};
+        }
+        let inView = nearViewport(el, parseInt(rootMargin, 10) || 320);
+        const update = () => onChange(inView && !document.hidden);
+        const io = new IntersectionObserver(
+          ([entry]) => {
+            inView = entry.isIntersecting;
+            update();
+          },
+          { rootMargin },
+        );
+        io.observe(el);
+        document.addEventListener("visibilitychange", update, passive);
+        update();
+        return () => {
+          io.disconnect();
+          document.removeEventListener("visibilitychange", update);
+        };
+      }
+      function onCanvasResize(c, cb) {
+        const run = rafThrottle(cb);
+        if ("ResizeObserver" in window) {
+          const ro = new ResizeObserver(run);
+          ro.observe(c);
+          addEventListener("resize", run, passive);
+          return () => {
+            ro.disconnect();
+            removeEventListener("resize", run);
+          };
+        }
+        addEventListener("resize", run, passive);
+        return () => removeEventListener("resize", run);
+      }
+      function disposeScene(scene) {
+        scene.traverse((obj) => {
+          if (obj.geometry) obj.geometry.dispose();
+          const mats = obj.material ? (Array.isArray(obj.material) ? obj.material : [obj.material]) : [];
+          mats.forEach((mat) => {
+            Object.keys(mat).forEach((key) => {
+              const value = mat[key];
+              if (value && value.isTexture) value.dispose();
+            });
+            if (mat.dispose) mat.dispose();
+          });
+        });
+      }
+      function fitRenderer(r, c, cam, dprCap = 1.6) {
         const b = c.getBoundingClientRect(),
           w = Math.max(1, Math.floor(b.width)),
-          h = Math.max(1, Math.floor(b.height));
-        r.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+          h = Math.max(1, Math.floor(b.height)),
+          dpr = maxDpr(dprCap),
+          prev = r.__fitState || {};
+        if (prev.w === w && prev.h === h && prev.dpr === dpr) return;
+        r.setPixelRatio(dpr);
         r.setSize(w, h, false);
+        r.__fitState = { w, h, dpr };
         if (cam) {
           cam.aspect = w / h;
           cam.updateProjectionMatrix();
@@ -31,8 +156,7 @@
       function initLoader() {
         const c = $("#loader-canvas");
         if (!c) return;
-        const r = new THREE.WebGLRenderer({ canvas: c, alpha: true, antialias: true });
-        r.setPixelRatio(Math.min(devicePixelRatio, 1.8));
+        const r = new THREE.WebGLRenderer({ canvas: c, ...rendererBase(true) });
         const s = new THREE.Scene();
         const cam = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 120);
         cam.position.z = 7;
@@ -81,7 +205,7 @@
             new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: d.op })
           );
           ring.rotation.set(d.rx, d.ry, 0);
-          ring.userData.sp = d.sp;
+          ring.userData = { sp: d.sp, radius: d.r };
           atom.add(ring);
           return ring;
         });
@@ -92,7 +216,7 @@
             new THREE.SphereGeometry(0.055, 12, 12),
             new THREE.MeshBasicMaterial({ color: 0xffffff })
           );
-          e.userData = { ring, angle: i * 2.1, speed: 0.025 + i * 0.008 };
+          e.userData = { ring, angle: i * 2.1, speed: 0.025 + i * 0.008, pos: new THREE.Vector3() };
           s.add(e);
           return e;
         });
@@ -116,8 +240,8 @@
         });
         s.add(new THREE.Points(pGeo, pMat));
 
-        fitRenderer(r, c, cam);
-        addEventListener("resize", () => fitRenderer(r, c, cam));
+        fitRenderer(r, c, cam, 1.8);
+        const cleanupResize = onCanvasResize(c, () => fitRenderer(r, c, cam, 1.8));
 
         // AI status messages
         const statusEl = $("#ldr-status");
@@ -159,16 +283,18 @@
 
         // Mouse parallax
         let mx = 0, my = 0, targetMx = 0, targetMy = 0;
-        document.addEventListener("mousemove", e => {
+        const onMouseMove = (e) => {
           targetMx = (e.clientX / innerWidth - 0.5) * 2;
           targetMy = (e.clientY / innerHeight - 0.5) * 2;
-        });
+        };
+        if (finePointer) document.addEventListener("mousemove", onMouseMove, passive);
 
         let p = 0, done = false;
         const start = performance.now();
-        function loop(t) {
+        const pctEl = $("#loader-pct"), barEl = $("#loader-bar");
+        let loaderLoop;
+        loaderLoop = createRafLoop((t) => {
           if (done) return;
-          requestAnimationFrame(loop);
           const time = (t - start) / 1000;
 
           // Smooth mouse parallax on camera
@@ -193,9 +319,9 @@
           // Electron orbits
           electrons.forEach(e => {
             e.userData.angle += e.userData.speed;
-            const pos = new THREE.Vector3(
-              Math.cos(e.userData.angle) * e.userData.ring.geometry.parameters.radius,
-              Math.sin(e.userData.angle) * e.userData.ring.geometry.parameters.radius,
+            const pos = e.userData.pos.set(
+              Math.cos(e.userData.angle) * e.userData.ring.userData.radius,
+              Math.sin(e.userData.angle) * e.userData.ring.userData.radius,
               0
             );
             e.userData.ring.localToWorld(pos);
@@ -216,12 +342,12 @@
 
           // Progress
           p = Math.min(100, p + (prefersReduced ? 6 : 0.55 + Math.random() * 1.1));
-          const pctEl = $("#loader-pct"), barEl = $("#loader-bar");
           if (pctEl) pctEl.textContent = Math.floor(p) + "%";
           if (barEl) barEl.style.width = p + "%";
 
           if (p >= 100 && !done) {
             done = true;
+            loaderLoop.setActive(false);
             clearInterval(msgTimer);
             clearInterval(hudTimer);
             if (statusEl) { statusEl.classList.add("fading"); }
@@ -237,22 +363,25 @@
               setTimeout(() => {
                 document.body.classList.remove("locked");
                 if (loader) loader.style.display = "none";
+                cleanupResize();
+                if (finePointer) document.removeEventListener("mousemove", onMouseMove);
+                loaderLoop.destroy();
+                disposeScene(s);
                 r.dispose();
                 startIntro();
               }, 950);
             }, 400);
           }
           r.render(s, cam);
-        }
-        requestAnimationFrame(loop);
+        }, { pauseWhenHidden: false });
+        loaderLoop.start();
       }
 
       function initBg() {
         const c = $("#bg-canvas"),
           r = new THREE.WebGLRenderer({
             canvas: c,
-            alpha: true,
-            antialias: false,
+            ...rendererBase(false),
           }),
           s = new THREE.Scene(),
           cam = new THREE.PerspectiveCamera(
@@ -286,9 +415,8 @@
           ),
         );
         fitRenderer(r, c, cam);
-        addEventListener("resize", () => fitRenderer(r, c, cam));
-        function loop() {
-          requestAnimationFrame(loop);
+        onCanvasResize(c, () => fitRenderer(r, c, cam));
+        const bgLoop = createRafLoop(() => {
           for (let i = 0; i < n; i++) {
             pos[i * 3 + 1] += vel[i];
             if (pos[i * 3 + 1] > 15) pos[i * 3 + 1] = -15;
@@ -296,15 +424,14 @@
           g.attributes.position.needsUpdate = true;
           s.rotation.y = scrollY * 0.00008;
           r.render(s, cam);
-        }
-        loop();
+        });
+        bgLoop.start();
       }
       function initOrb() {
         const c = $("#orb-canvas"),
           r = new THREE.WebGLRenderer({
             canvas: c,
-            alpha: true,
-            antialias: true,
+            ...rendererBase(true),
           }),
           s = new THREE.Scene(),
           cam = new THREE.PerspectiveCamera(45, 1, 0.1, 60);
@@ -350,16 +477,15 @@
           group.add(m);
         });
         fitRenderer(r, c, cam);
-        addEventListener("resize", () => fitRenderer(r, c, cam));
+        onCanvasResize(c, () => fitRenderer(r, c, cam));
         let mx = 0,
           my = 0;
-        addEventListener("mousemove", (e) => {
+        if (finePointer) addEventListener("mousemove", (e) => {
           mx = e.clientX / innerWidth - 0.5;
           my = e.clientY / innerHeight - 0.5;
-        });
+        }, passive);
         let fitDone = false;
-        function loop(t) {
-          requestAnimationFrame(loop);
+        const orbLoop = createRafLoop((t) => {
           if (!fitDone) {
             fitRenderer(r, c, cam);
             if (c.getBoundingClientRect().height > 0) fitDone = true;
@@ -381,15 +507,15 @@
             }
           });
           r.render(s, cam);
-        }
-        loop(0);
+        });
+        watchVisibility(c, (active) => orbLoop.setActive(active), "520px");
+        orbLoop.start();
       }
       function initSkillsScene() {
         const c = $("#skills-canvas"),
           r = new THREE.WebGLRenderer({
             canvas: c,
-            alpha: true,
-            antialias: true,
+            ...rendererBase(true),
           }),
           s = new THREE.Scene(),
           cam = new THREE.PerspectiveCamera(45, 1, 0.1, 70);
@@ -439,10 +565,9 @@
         );
         cam.lookAt(0, 0, 0);
         fitRenderer(r, c, cam);
-        addEventListener("resize", () => fitRenderer(r, c, cam));
+        onCanvasResize(c, () => fitRenderer(r, c, cam));
         let fitDone = false;
-        function loop() {
-          requestAnimationFrame(loop);
+        const skillsLoop = createRafLoop(() => {
           if (!fitDone) {
             fitRenderer(r, c, cam);
             if (c.getBoundingClientRect().height > 0) fitDone = true;
@@ -462,31 +587,44 @@
             }
           });
           r.render(s, cam);
-        }
-        loop();
+        });
+        watchVisibility(c, (active) => skillsLoop.setActive(active), "520px");
+        skillsLoop.start();
       }
       function initRain() {
         const c = $("#rain-canvas"),
-          ctx = c.getContext("2d"),
+          ctx = c.getContext("2d", { alpha: true }),
           chars =
             "01{}();=> const let async await fetch git npm docker AI API React Node Python".split(
               " ",
             );
+        let cols = [],
+          w = 18,
+          drawW = 0,
+          drawH = 0,
+          rainDpr = 1;
         function size() {
-          c.width = c.offsetWidth * devicePixelRatio;
-          c.height = c.offsetHeight * devicePixelRatio;
-          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+          const nextDpr = maxDpr(1.6);
+          const nextW = Math.max(1, Math.floor(c.offsetWidth * nextDpr));
+          const nextH = Math.max(1, Math.floor(c.offsetHeight * nextDpr));
+          if (drawW === nextW && drawH === nextH && rainDpr === nextDpr) return;
+          drawW = nextW;
+          drawH = nextH;
+          rainDpr = nextDpr;
+          c.width = drawW;
+          c.height = drawH;
+          ctx.setTransform(rainDpr, 0, 0, rainDpr, 0, 0);
+          ctx.font = "14px monospace";
+          cols = [];
         }
         size();
-        addEventListener("resize", size);
-        let cols = [],
-          w = 18;
-        function draw() {
+        onCanvasResize(c, size);
+        const rainLoop = createRafLoop(() => {
           ctx.fillStyle = "rgba(5,7,11,.18)";
           ctx.fillRect(0, 0, c.offsetWidth, c.offsetHeight);
-          ctx.font = "14px monospace";
           const n = Math.ceil(c.offsetWidth / w);
           while (cols.length < n) cols.push(Math.random() * c.offsetHeight);
+          if (cols.length > n) cols.length = n;
           cols.forEach((y, i) => {
             ctx.fillStyle =
               Math.random() > 0.15
@@ -501,24 +639,33 @@
             if (cols[i] > c.offsetHeight + 30 && Math.random() > 0.94)
               cols[i] = 0;
           });
-          requestAnimationFrame(draw);
-        }
-        draw();
+        });
+        watchVisibility(c, (active) => rainLoop.setActive(active), "420px");
+        rainLoop.start();
       }
       function initUI() {
         const sp = $("#sp"),
           nav = $("#navbar");
-        addEventListener("scroll", () => {
-          const max = document.documentElement.scrollHeight - innerHeight;
-          sp.style.width = (scrollY / max) * 100 + "%";
+        const navTargets = $$("[data-sec]").map((a) => ({
+          a,
+          section: $("#" + a.dataset.sec),
+        }));
+        let scrollFrame = 0;
+        const updateScroll = () => {
+          scrollFrame = 0;
+          const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+          sp.style.transform = "scaleX(" + Math.min(1, scrollY / max) + ")";
           nav.classList.toggle("scrolled", scrollY > 50);
-          $$("[data-sec]").forEach((a) => {
-            const s = $("#" + a.dataset.sec);
-            if (!s) return;
-            const r = s.getBoundingClientRect();
+          navTargets.forEach(({ a, section }) => {
+            if (!section) return;
+            const r = section.getBoundingClientRect();
             a.classList.toggle("active", r.top < 150 && r.bottom > 150);
           });
-        });
+        };
+        addEventListener("scroll", () => {
+          if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
+        }, passive);
+        updateScroll();
 
         // Upgraded reveal observer
         const revealEls = [".reveal", ".sec-eyebrow", ".sec-heading", ".journey", ".about-text-col"];
@@ -565,13 +712,14 @@
         // Carousel
         let idx = 0;
         const slides = $("#cslides"),
-          dots = $$(".cdot");
+          dots = $$(".cdot"),
+          projectItems = $$(".proj-nav-item");
         function go(n) {
           idx = (n + 3) % 3;
           if (slides) slides.style.transform = "translateX(-" + idx * 100 + "%)";
           dots.forEach((d, i) => d.classList.toggle("on", i === idx));
           // Sync project nav
-          $$(".proj-nav-item").forEach((item, i) => {
+          projectItems.forEach((item, i) => {
             item.classList.toggle("active", i === idx);
           });
         }
@@ -581,7 +729,7 @@
         dots.forEach((d) => (d.onclick = () => go(+d.dataset.i)));
 
         // Project nav click
-        $$(".proj-nav-item").forEach((item) => {
+        projectItems.forEach((item) => {
           item.addEventListener("click", () => {
             go(+item.dataset.proj);
           });
@@ -603,11 +751,11 @@
           const modal = $("#cert-modal");
           modal.classList.remove("active");
         };
-        $$(".skill-card").forEach((card) => {
-          card.addEventListener("mousemove", (e) => {
+        if (finePointer) $$(".skill-card").forEach((card) => {
+          const tilt = rafThrottle((clientX, clientY) => {
             const r = card.getBoundingClientRect(),
-              x = e.clientX - r.left,
-              y = e.clientY - r.top;
+              x = clientX - r.left,
+              y = clientY - r.top;
             card.style.transform =
               "perspective(900px) rotateX(" +
               -(y / r.height - 0.5) * 5 +
@@ -615,6 +763,7 @@
               (x / r.width - 0.5) * 7 +
               "deg)";
           });
+          card.addEventListener("mousemove", (e) => tilt(e.clientX, e.clientY), passive);
           card.addEventListener(
             "mouseleave",
             () => (card.style.transform = ""),
@@ -632,7 +781,12 @@
         let pi = 0,
           ci = 0,
           del = false;
+        if (!el) return;
         function tick() {
+          if (document.hidden) {
+            setTimeout(tick, 250);
+            return;
+          }
           const t = phrases[pi];
           if (!del) {
             el.textContent = t.slice(0, ++ci);
@@ -681,47 +835,50 @@
         const card = $("#holo-card");
 
         // Cursor glow tracking
-        if (glow) {
-          document.addEventListener("mousemove", (e) => {
-            glow.style.left = e.clientX + "px";
-            glow.style.top = e.clientY + "px";
+        if (glow && finePointer) {
+          const moveGlow = rafThrottle((x, y) => {
+            glow.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
           });
+          document.addEventListener("mousemove", (e) => moveGlow(e.clientX, e.clientY), passive);
         }
 
         // 3D tilt on holographic card
-        if (card) {
-          card.addEventListener("mousemove", (e) => {
+        if (card && finePointer) {
+          const tiltCard = rafThrottle((clientX, clientY) => {
             const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            card.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+            const x = (clientX - r.left) / r.width - 0.5;
+            const y = (clientY - r.top) / r.height - 0.5;
+            card.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg) scale(1.02) translateZ(0)`;
           });
+          card.addEventListener("mousemove", (e) => tiltCard(e.clientX, e.clientY), passive);
           card.addEventListener("mouseleave", () => {
-            card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)";
+            card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1) translateZ(0)";
           });
         }
 
         // Magnetic button effect
-        $$(".magnetic").forEach((btn) => {
-          btn.addEventListener("mousemove", (e) => {
+        if (finePointer) $$(".magnetic").forEach((btn) => {
+          const moveBtn = rafThrottle((clientX, clientY) => {
             const r = btn.getBoundingClientRect();
-            const x = e.clientX - r.left - r.width / 2;
-            const y = e.clientY - r.top - r.height / 2;
-            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            const x = clientX - r.left - r.width / 2;
+            const y = clientY - r.top - r.height / 2;
+            btn.style.transform = `translate3d(${x * 0.2}px, ${y * 0.2}px, 0)`;
           });
+          btn.addEventListener("mousemove", (e) => moveBtn(e.clientX, e.clientY), passive);
           btn.addEventListener("mouseleave", () => {
-            btn.style.transform = "translate(0, 0)";
+            btn.style.transform = "translate3d(0, 0, 0)";
           });
         });
 
         // Parallax on hero left content
         const heroLeft = $("#hero-left");
-        if (heroLeft && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          document.addEventListener("mousemove", (e) => {
-            const x = (e.clientX / innerWidth - 0.5) * 12;
-            const y = (e.clientY / innerHeight - 0.5) * 6;
-            heroLeft.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        if (heroLeft && finePointer && !prefersReduced) {
+          const moveHero = rafThrottle((clientX, clientY) => {
+            const x = (clientX / innerWidth - 0.5) * 12;
+            const y = (clientY / innerHeight - 0.5) * 6;
+            heroLeft.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0)`;
           });
+          document.addEventListener("mousemove", (e) => moveHero(e.clientX, e.clientY), passive);
         }
       }
 
@@ -731,4 +888,3 @@
       initSkillsScene();
       initRain();
       initUI();
-
