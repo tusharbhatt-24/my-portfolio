@@ -715,7 +715,7 @@
           dots = $$(".cdot"),
           projectItems = $$(".proj-nav-item");
         function go(n) {
-          idx = (n + 3) % 3;
+          idx = (n + dots.length) % dots.length;
           if (slides) slides.style.transform = "translateX(-" + idx * 100 + "%)";
           dots.forEach((d, i) => d.classList.toggle("on", i === idx));
           // Sync project nav
