@@ -1532,6 +1532,32 @@
         line-height: 1.7;
         margin-bottom: 18px;
       }
+      .project-github-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border: 1px solid rgba(0, 255, 178, 0.2);
+        border-radius: 8px;
+        background: rgba(0, 255, 178, 0.05);
+        color: #c7fff0;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        margin-top: 12px;
+      }
+      .project-github-btn:hover {
+        border-color: var(--green);
+        background: rgba(0, 255, 178, 0.12);
+        box-shadow: 0 4px 12px rgba(0, 255, 178, 0.1);
+        transform: translateY(-2px);
+        color: var(--green);
+      }
+      .project-github-btn svg {
+        width: 16px;
+        height: 16px;
+      }
       .device {
         position: relative;
         height: 240px;
