@@ -27,13 +27,9 @@ A premium, interactive portfolio website showcasing my work, skills, and certifi
 
 ## 🚀 Getting Started
 
-To run this project locally:
+To run this project:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/tusharbhatt-24/my-portfolio.git
-   ```
-2. Open `index.html` in your browser or use a live server.
+https://my-portfolio-alpha-pink-90.vercel.app
 
 ## 📄 License
 
