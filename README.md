@@ -24,12 +24,13 @@ A premium, interactive portfolio website showcasing my work, skills, and certifi
 - **ISLbridge**: Real-Time Sign Language Translating Platform.
 - **BotForge**: AI Assistant Builder for Websites.
 - **JARVIS**: Local AI Assistant (Offline).
+- **Tunexa**: Premium media downloader & Spotify → YouTube Music playlist sync.
 
 ## 🚀 Getting Started
 
 To run this project:
 
-https://my-portfolio-alpha-pink-90.vercel.app
+https://tusharbhatt-24.github.io/my-portfolio/
 
 ## 📄 License
 
