@@ -1,128 +1,1910 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Tushar Bhatt | Portfolio</title>
-    <meta
-      name="description"
-      content="Tushar Bhatt — CS undergrad at AKTU, AI & ML, Full Stack Development"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body class="locked">
-    <div id="sp"></div>
-    <canvas id="bg-canvas"></canvas>
-    <div class="noise"></div>
-    <div id="loader"></div>
-    <nav id="navbar">
-      <a class="nav-logo" href="#home">TB</a>
-      <ul class="nav-links">
-        <li>
-          <a
-            href="https://linkedin.com/in/tusharbhatt24"
-            target="_blank"
-            rel="noopener"
-            >LINKEDIN</a
-          >
-        </li>
-        <li><a href="#about" data-sec="about">ABOUT</a></li>
-        <li><a href="#work" data-sec="work">WORK</a></li>
-        <li>
-          <a href="#certificates" data-sec="certificates">CERTIFICATES</a>
-        </li>
-        <li><a href="#contact" data-sec="contact">CONTACT</a></li>
-      </ul>
-    </nav>
-    <div id="sidebar">
-      <div class="sb-line"></div>
-      <a
-        class="sb-icon sb-github"
-        href="https://github.com/tusharbhatt-24"
-        target="_blank"
-        title="GitHub"
-        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-        </svg></a><a
-        class="sb-icon"
-        href="https://www.linkedin.com/in/tusharbhatt24/"
-        target="_blank"
-        title="LinkedIn"
-        ><svg viewBox="0 0 24 24">
-          <path
-            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-          /></svg></a
-      ><a
-        class="sb-icon sb-instagram"
-        href="https://www.instagram.com/tushar__bhatt/"
-        target="_blank"
-        title="Instagram"
-        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg></a
-      ><a
-        class="sb-icon sb-mail"
-        href="mailto:bhatttushar2006@gmail.com"
-        title="Email"
-        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg></a
-      ><a
-        class="sb-icon"
-        href="tel:9650227051"
-        title="Phone"
-        ><svg viewBox="0 0 24 24">
-          <path
-            d="M20 22.6c-1.1 0-2.2-.2-3.3-.6-3.1-1.2-6-3.2-8.4-5.6-2.4-2.4-4.4-5.3-5.6-8.4-.4-1.1-.6-2.2-.6-3.3 0-1.1.4-2.1 1.2-2.9l2.2-2.2c.8-.8 2.1-.8 2.9 0l2.5 2.5c.8.8.8 2.1 0 2.9l-1.2 1.2c-.2.2-.3.5-.2.8.5 1.1 1.2 2.1 2.1 3 1 .9 2 1.6 3.1 2.1.3.1.6 0 .8-.2l1.2-1.2c.8-.8 2.1-.8 2.9 0l2.5 2.5c.8.8.8 2.1 0 2.9l-2.2 2.2c-.8.8-1.8 1.2-2.9 1.2zM6.5 2c-.3 0-.6.1-.8.3l-2.2 2.2c-.3.3-.5.7-.5 1.1 0 .8.2 1.6.5 2.4 1.1 2.8 2.9 5.4 5.1 7.6s4.8 4 7.6 5.1c.8.3 1.6.5 2.4.5.4 0 .8-.2 1.1-.5l2.2-2.2c.4-.4.4-1.1 0-1.5l-2.5-2.5c-.4-.4-1.1-.4-1.5 0l-1.4 1.4c-.6.6-1.5.7-2.3.3-.9-.4-1.8-1-2.6-1.8-.8-.8-1.4-1.7-1.8-2.6-.4-.8-.3-1.7.3-2.3l1.4-1.4c.4-.4.4-1.1 0-1.5l-2.5-2.5c-.2-.2-.5-.3-.8-.3z"
-            fill="currentColor"
-          /></svg></a>
-      <div class="sb-line"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tushar Bhatt — Full Stack & AI/ML Engineer</title>
+  <meta name="description"
+    content="Tushar Bhatt — CS undergrad at AKTU. Full Stack Developer & AI/ML Engineer building intelligent, fast, beautiful products." />
+  <meta name="author" content="Tushar Bhatt" />
+  <meta name="theme-color" content="#030407" />
+  <link rel="icon" type="image/svg+xml" href="og-image.svg" />
+  <link rel="canonical" href="https://tusharbhatt-24.github.io/my-portfolio/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tushar Bhatt" />
+  <meta property="og:title" content="Tushar Bhatt — Full Stack & AI/ML Engineer" />
+  <meta property="og:description"
+    content="CS undergrad building intelligent, fast, beautiful products. Full stack, AI/ML, and motion-led interfaces." />
+  <meta property="og:url" content="https://tusharbhatt-24.github.io/my-portfolio/" />
+  <meta property="og:image" content="https://tusharbhatt-24.github.io/my-portfolio/og-image.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tushar Bhatt — Full Stack & AI/ML Engineer" />
+  <meta name="twitter:description"
+    content="CS undergrad building intelligent, fast, beautiful products. Full stack, AI/ML, and motion-led interfaces." />
+  <meta name="twitter:image" content="https://tusharbhatt-24.github.io/my-portfolio/og-image.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // Apply saved theme before paint to avoid flash
+    try {
+      if (localStorage.getItem("tb-theme") === "light")
+        document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) { }
+  </script>
+</head>
+
+<body class="locked">
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Three.js particle field -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="hud-grid" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Preloader -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-mark">TB</div>
+      <div class="loader-bar"><span id="loader-fill"></span></div>
+      <div class="loader-pct"><span id="loader-pct">0</span>%</div>
+      <div class="loader-status" id="loader-status">Initializing interface</div>
     </div>
-    <a id="resume-btn" href="Tushar_Bhatt_Resume%20.pdf" target="_blank">RESUME</a>
-    <main>
-      <section id="home"></section>
-      <section id="about"></section>
-      <section id="skills"></section>
-      <section id="work"></section>
-      <div id="rain-strip">
-        <canvas id="rain-canvas"></canvas>
-        <div class="rain-fade-t"></div>
-        <div class="rain-fade-b"></div>
+  </div>
+
+  <!-- Nav -->
+  <header id="navbar">
+    <a class="nav-logo" href="#home" data-magnetic>
+      <span class="logo-mark">TB</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Expertise</a>
+      <a href="#work">Work</a>
+      <a href="#repos">Repos</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-resume" href="Tushar_Bhatt_Resume%20.pdf" target="_blank" rel="noopener" data-magnetic>Resume <span
+        aria-hidden="true">↗</span></a>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <button class="nav-theme" id="nav-theme" aria-label="Toggle light mode" title="Toggle theme">
+      <span class="theme-ico" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-copy">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="dot"></span> Available for opportunities
+            </p>
+            <h1 class="hero-name" aria-label="Tushar Bhatt">
+              <span class="hero-hi reveal" data-reveal>HELLO,</span>
+              <span class="hero-im reveal" data-reveal>I'm</span>
+              <span class="line reveal" data-reveal>TUSHAR</span>
+              <span class="line line-2 reveal" data-reveal>BHATT</span>
+            </h1>
+            <p class="hero-role reveal" data-reveal>
+              <span class="role-type">Full Stack AI Developer</span>
+            </p>
+            <p class="hero-bio reveal" data-reveal>
+              Building <span class="rot-word" id="rot-word">intelligent software</span>,
+              AI products, and premium digital experiences.
+            </p>
+
+            <!-- Compact AI status panel -->
+            <div class="ai-status reveal" id="ai-status" data-reveal aria-hidden="true">
+              <div class="st-bar">
+                <span class="st-title"><i class="st-dot"></i> AI SYSTEM</span>
+                <span class="st-live"><i class="st-pulse"></i> ONLINE</span>
+              </div>
+              <ul class="st-list">
+                <li><span class="st-k">STATUS</span><span class="st-v ok">Operational</span></li>
+                <li><span class="st-k">ROLE</span><span class="st-v">Full Stack AI Developer</span></li>
+                <li><span class="st-k">LOCATION</span><span class="st-v">Delhi, India</span></li>
+                <li><span class="st-k">MISSION</span><span class="st-v">Building AI products</span></li>
+              </ul>
+            </div>
+
+            <!-- Animated tech chips -->
+            <div class="tech-cloud reveal" id="tech-cloud" data-reveal aria-hidden="true">
+              <span class="chip-float">Python</span>
+              <span class="chip-float">React</span>
+              <span class="chip-float">FastAPI</span>
+              <span class="chip-float">Flutter</span>
+              <span class="chip-float">AI</span>
+              <span class="chip-float">TensorFlow</span>
+              <span class="chip-float">MongoDB</span>
+              <span class="chip-float">JavaScript</span>
+            </div>
+
+            <div class="hero-actions reveal" data-reveal>
+              <a class="btn btn-primary" href="#work" data-magnetic data-ripple>
+                <span>Explore Projects</span>
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none">
+                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </a>
+              <a class="btn btn-ghost" href="Tushar_Bhatt_Resume%20.pdf" target="_blank" rel="noopener" data-magnetic
+                data-ripple>
+                <span>Download Resume</span>
+                <svg viewBox="0 0 14 14" width="14" height="14" fill="none">
+                  <path d="M7 1v9M3 6l4 4 4-4M1 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-stage" aria-hidden="true">
+          <div class="stage-card" id="stage-card">
+            <div class="stage-scan"></div>
+            <canvas id="orb-canvas"></canvas>
+            <div class="hud hud-tl"><span>STATUS</span><b class="live">ONLINE</b></div>
+            <div class="hud hud-br"><span>BUILD</span><b>v3.0</b></div>
+            <ul class="stage-stream">
+              <li>FULL_STACK = true</li>
+              <li>AI_ML = active</li>
+              <li>LEETCODE = 100+</li>
+              <li>GPA = 8.5</li>
+            </ul>
+            <span class="corner c-tl"></span><span class="corner c-tr"></span>
+            <span class="corner c-bl"></span><span class="corner c-br"></span>
+          </div>
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="chip chip-a"><b>3+</b><span>Projects</span></div>
+          <div class="chip chip-b"><b>8.5</b><span>GPA</span></div>
+          <div class="chip chip-c"><b>100+</b><span>LeetCode</span></div>
+        </aside>
       </div>
-      <section id="certificates"></section>
-      <section id="contact"></section>
-    </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script>
-      async function loadSections() {
-        const sections = ['home', 'about', 'skills', 'work', 'certificates', 'contact'];
-        const loaderPromise = fetch('sections/loading.html').then((res) => res.text());
-        const sectionPromises = sections.map((s) =>
-          fetch(`sections/${s}.html`).then((res) => res.text()),
-        );
+      <a class="scroll-hint" href="#about" aria-label="Scroll to about">
+        <span></span>SCROLL
+      </a>
+    </section>
 
-        document.getElementById('loader').innerHTML = await loaderPromise;
-        const htmlSections = await Promise.all(sectionPromises);
-        htmlSections.forEach((html, index) => {
-          document.getElementById(sections[index]).innerHTML = html;
-        });
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> WHO I AM</p>
+        <h2 class="reveal" data-reveal>About <span class="ghost">me</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="reveal" data-reveal>
+            I'm a Computer Science undergrad at
+            <mark>AKTU</mark>, specialising in <mark>AI &amp; ML</mark>, with a
+            strong passion for building and experimenting. I enjoy creating
+            full-stack applications, exploring new tech, and shipping
+            real-world projects through freelancing.
+          </p>
+          <p class="reveal" data-reveal>
+            <mark>Always learning, always building.</mark>
+          </p>
+          <ol class="timeline">
+            <li class="reveal" data-reveal>
+              <span class="yr">2024</span>
+              <span class="ev">Started B.Tech CSE at AKTU</span>
+            </li>
+            <li class="reveal" data-reveal>
+              <span class="yr">2025</span>
+              <span class="ev">First AI project &amp; freelancing</span>
+            </li>
+            <li class="reveal" data-reveal>
+              <span class="yr">2026</span>
+              <span class="ev">Building RetirePRO, ISLbridge, BotForge</span>
+            </li>
+          </ol>
+        </div>
+        <div class="about-stats">
+          <article class="stat-card reveal" data-reveal>
+            <span class="stat-icon">@</span>
+            <span class="stat-num"><span class="counter" data-target="8.5" data-dec="1">0</span>/10</span>
+            <span class="stat-label">GPA at AKTU</span>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="stat-icon">◆</span>
+            <span class="stat-num"><span class="counter" data-target="3">0</span>+</span>
+            <span class="stat-label">Clients served</span>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="stat-icon">▲</span>
+            <span class="stat-num"><span class="counter" data-target="100">0</span>+</span>
+            <span class="stat-label">LeetCode solved</span>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        const script = document.createElement('script');
-        script.src = 'script.js';
-        script.async = false;
-        document.body.appendChild(script);
-      }
-      loadSections();
-    </script>
-  </body>
+    <!-- EXPERIENCE / AI CAREER JOURNEY -->
+    <section id="experience" class="section exp">
+      <!-- Intro boot sequence (types in, then fades) -->
+      <div class="exp-intro" id="exp-intro" aria-hidden="true">
+        <div class="exp-intro-inner">
+          <p class="exp-intro-line" data-i="0">Loading Career Records<span class="caret">_</span></p>
+          <p class="exp-intro-line" data-i="1">Scanning Internship Database<span class="caret">_</span></p>
+          <p class="exp-intro-line" data-i="2">Career Timeline Ready<span class="caret">_</span></p>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> FROM EXPERIENCE</p>
+        <h2 class="reveal" data-reveal>AI Career <span class="ghost">Journey</span></h2>
+        <p class="section-sub reveal" data-reveal>A timeline of my professional growth through internships, real-world
+          projects, and continuous learning.</p>
+      </div>
+
+      <div class="exp-track" id="exp-track">
+        <!-- Glowing vertical timeline (animated, scroll-driven) -->
+        <div class="exp-line" aria-hidden="true">
+          <span class="exp-line-glow"></span>
+          <span class="exp-line-fill" id="exp-line-fill"></span>
+          <span class="exp-line-pulse"></span>
+          <span class="exp-particle p1"></span>
+          <span class="exp-particle p2"></span>
+          <span class="exp-particle p3"></span>
+        </div>
+
+        <!-- MILESTONES -->
+        <ol class="exp-list">
+          <li class="exp-item" data-side="left">
+            <div class="exp-node" tabindex="0" aria-label="Milestone node">
+              <span class="node-ring"></span>
+              <span class="node-core"></span>
+              <span class="node-orbit o1"></span>
+              <span class="node-orbit o2"></span>
+              <span class="node-ripple"></span>
+            </div>
+            <article class="exp-card">
+              <span class="corner c-tl"></span><span class="corner c-tr"></span>
+              <span class="corner c-bl"></span><span class="corner c-br"></span>
+              <header class="exp-card-head">
+                <div class="exp-logo" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" width="40" height="40">
+                    <rect x="6" y="6" width="36" height="36" rx="10" fill="none" stroke="currentColor"
+                      stroke-width="2" />
+                    <path d="M16 30l6-12 6 12M19 26h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" fill="none" />
+                  </svg>
+                </div>
+                <div class="exp-head-text">
+                  <h3 class="exp-company">Syslaan IT Solutions</h3>
+                  <p class="exp-role">Full Stack Web Development Intern</p>
+                </div>
+                <span class="exp-remote">REMOTE</span>
+              </header>
+              <p class="exp-meta"><span class="exp-dur">May 2026 – Jun 2026</span></p>
+              <p class="exp-desc">• Built responsive full-stack web applications using HTML, CSS, JavaScript, React,
+                Node.js, and MongoDB.<br>• Designed and integrated REST APIs connecting backend services to frontend
+                applications.<br>• Optimized application performance and resolved bugs to improve user experience.<br>•
+                Collaborated on real-world development tasks following software engineering best practices.</p>
+              <div class="exp-stack">
+                <span class="exp-chip">HTML</span><span class="exp-chip">CSS</span><span
+                  class="exp-chip">JavaScript</span><span class="exp-chip">React</span><span
+                  class="exp-chip">Node.js</span><span class="exp-chip">MongoDB</span><span class="exp-chip">REST
+                  APIs</span>
+              </div>
+              <button class="exp-cert" type="button" data-magnetic data-ripple
+                data-img="images/certificates/internships/Tushar Bhatt Syslaan.jpg"
+                data-title="Full Stack Development Internship" data-issuer="Syslaan IT Solutions" data-date="2026"
+                data-cat="Internship" data-type="Full Stack Web Development"
+                data-skills="HTML, CSS, JavaScript, React, Node.js, MongoDB, REST APIs"
+                data-desc="Successfully completed a month-long Full Stack Web Development internship at Syslaan IT Solutions, from 03 June 2026 to 03 July 2026. Gained hands-on experience in designing and developing responsive web applications, integrating backend services with frontend interfaces, and optimizing application performance.">
+                <span>View Certificate</span>
+                <svg viewBox="0 0 14 14" width="13" height="13" fill="none">
+                  <path d="M3 8l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+            </article>
+          </li>
+
+          <li class="exp-item" data-side="right">
+            <div class="exp-node" tabindex="0" aria-label="Milestone node">
+              <span class="node-ring"></span>
+              <span class="node-core"></span>
+              <span class="node-orbit o1"></span>
+              <span class="node-orbit o2"></span>
+              <span class="node-ripple"></span>
+            </div>
+            <article class="exp-card">
+              <span class="corner c-tl"></span><span class="corner c-tr"></span>
+              <span class="corner c-bl"></span><span class="corner c-br"></span>
+              <header class="exp-card-head">
+                <div class="exp-logo" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" width="40" height="40">
+                    <circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M24 12v24M14 20l10 4 10-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      fill="none" />
+                  </svg>
+                </div>
+                <div class="exp-head-text">
+                  <h3 class="exp-company">Pinnacle Labs</h3>
+                  <p class="exp-role">Artificial Intelligence Intern</p>
+                </div>
+                <span class="exp-remote">REMOTE</span>
+              </header>
+              <p class="exp-meta"><span class="exp-dur">Jun 2026 – Jul 2026</span></p>
+              <p class="exp-desc">• Completed a 4-week virtual internship focused on Artificial Intelligence and Machine
+                Learning.<br>• Built AI-based projects involving data preprocessing, model development, and applied
+                problem-solving.<br>• Applied Python and Machine Learning concepts to build practical AI solutions.<br>•
+                Strengthened analytical thinking through hands-on experience with AI tools and workflows.</p>
+              <div class="exp-stack">
+                <span class="exp-chip">Python</span><span class="exp-chip">Machine Learning</span><span
+                  class="exp-chip">Artificial Intelligence</span><span class="exp-chip">Data Preprocessing</span><span
+                  class="exp-chip">Model Development</span>
+              </div>
+              <button class="exp-cert" type="button" data-magnetic data-ripple
+                data-img="images/certificates/internships/Tushar Bhatt pinnacle.jpeg"
+                data-title="Artificial Intelligence Internship" data-issuer="Pinnacle Labs" data-date="2026"
+                data-cat="Internship" data-type="Artificial Intelligence"
+                data-skills="Python, Machine Learning, Artificial Intelligence, Data Analysis, Problem Solving"
+                data-desc="Successfully completed a four-week Artificial Intelligence Internship at Pinnacle Labs from 4 June 2026 to 4 July 2026. Demonstrated exceptional dedication and technical skills while contributing to AI-focused tasks and projects, strengthening practical knowledge of machine learning concepts and real-world AI applications.">
+                <span>View Certificate</span>
+                <svg viewBox="0 0 14 14" width="13" height="13" fill="none">
+                  <path d="M3 8l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+            </article>
+          </li>
+
+          <li class="exp-item" data-side="left">
+            <div class="exp-node" tabindex="0" aria-label="Milestone node">
+              <span class="node-ring"></span>
+              <span class="node-core"></span>
+              <span class="node-orbit o1"></span>
+              <span class="node-orbit o2"></span>
+              <span class="node-ripple"></span>
+            </div>
+            <article class="exp-card">
+              <span class="corner c-tl"></span><span class="corner c-tr"></span>
+              <span class="corner c-bl"></span><span class="corner c-br"></span>
+              <header class="exp-card-head">
+                <div class="exp-logo" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" width="40" height="40">
+                    <path d="M10 34L24 10l14 24z" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linejoin="round" />
+                    <path d="M17 34l7-12 7 12" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div class="exp-head-text">
+                  <h3 class="exp-company">CodeSoft</h3>
+                  <p class="exp-role">Artificial Intelligence Intern</p>
+                </div>
+                <span class="exp-remote">REMOTE</span>
+              </header>
+              <p class="exp-meta"><span class="exp-dur">Jul 2026 – Aug 2026</span></p>
+              <p class="exp-desc">• Developed machine learning and data-driven solutions as part of a focused AI/ML
+                internship program.<br>• Implemented core Machine Learning concepts in Python across multiple assigned
+                projects, from data handling to model evaluation.<br>• Improved debugging and software development
+                practices through hands-on, project-based learning.<br>• Delivered all assigned projects on schedule
+                while adhering to industry best practices.</p>
+              <div class="exp-stack">
+                <span class="exp-chip">Python</span><span class="exp-chip">Machine Learning</span><span
+                  class="exp-chip">Artificial Intelligence</span><span class="exp-chip">Data Analysis</span><span
+                  class="exp-chip">Model Evaluation</span>
+              </div>
+              <button class="exp-cert" type="button" data-magnetic data-ripple
+                data-img="images/certificates/hackathon/HackerRank.jpeg" data-title="Artificial Intelligence Internship"
+                data-issuer="CodeSoft" data-date="2026" data-cat="Internship" data-type="Artificial Intelligence"
+                data-skills="Python,Machine Learning,Artificial Intelligence,Data Analysis,Model Evaluation"
+                data-desc="Successfully completed a four-week Artificial Intelligence Internship at CodeSoft from 5 June 2026 to 5 July 2026. Demonstrated exceptional dedication and technical skills while contributing to AI-focused tasks and projects, strengthening practical knowledge of machine learning concepts and real-world AI applications.">
+                <span>View Certificate</span>
+                <svg viewBox="0 0 14 14" width="13" height="13" fill="none">
+                  <path d="M3 8l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+            </article>
+          </li>
+        </ol>
+      </div>
+
+    </section>
+
+    <!-- NOW -->
+    <section id="now" class="section">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> CURRENTLY</p>
+        <h2 class="reveal" data-reveal>Now <span class="ghost">/ what I'm into</span></h2>
+      </div>
+      <div class="now-grid">
+        <article class="now-card reveal" data-reveal>
+          <span class="now-ico" aria-hidden="true">◐</span>
+          <h3>Building RetirePRO</h3>
+          <p>Shipping a recruitment platform with resume-analysis AI and automated workflows — going deeper on FastAPI +
+            React architecture.</p>
+        </article>
+        <article class="now-card reveal" data-reveal>
+          <span class="now-ico" aria-hidden="true">✦</span>
+          <h3>Learning system design</h3>
+          <p>Studying scalable backends, queues, and caching to make my AI products production-grade.</p>
+        </article>
+        <article class="now-card reveal" data-reveal>
+          <span class="now-ico" aria-hidden="true">⬡</span>
+          <h3>Exploring LLM agents</h3>
+          <p>Experimenting with RAG, tool-use, and local models (Ollama) — the engine behind BotForge &amp; JARVIS.</p>
+        </article>
+        <article class="now-card reveal" data-reveal>
+          <span class="now-ico" aria-hidden="true">◧</span>
+          <h3>Open to opportunities</h3>
+          <p>Looking for 2026 internships, freelance builds, and collaborations in AI/ML &amp; full-stack.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEURAL INTERFACE (brand-new interactive AI brain) -->
+    <section id="skills" class="section neural" aria-label="AI Neural Interface">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> NEURAL INTERFACE</p>
+        <h2 class="reveal" data-reveal>AI <span class="ghost">Brain</span></h2>
+        <p class="section-sub reveal" data-reveal>Explore my capabilities as a living neural network. Hover or tap a
+          node to trace its connections.</p>
+      </div>
+
+      <div class="neural-stage" id="neural-stage">
+        <!-- neural energy connection lines -->
+        <svg class="neural-links" id="neural-links" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet"
+          aria-hidden="true">
+          <defs>
+            <linearGradient id="nl-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="var(--accent-2)" />
+              <stop offset="1" stop-color="var(--accent)" />
+            </linearGradient>
+            <filter id="nl-glow">
+              <feGaussianBlur stdDeviation="2.5" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <g id="neural-links-g"></g>
+        </svg>
+
+        <!-- ambient particles -->
+        <div class="neural-particles" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- glowing AI core -->
+        <div class="neural-core" id="neural-core" aria-hidden="true">
+          <span class="core-ring r1"></span>
+          <span class="core-ring r2"></span>
+          <span class="core-ring r3"></span>
+          <span class="core-orb"></span>
+          <span class="core-label">AI<br>CORE</span>
+        </div>
+
+        <!-- floating capability nodes (positioned by CSS custom props) -->
+        <div class="neural-nodes" id="neural-nodes">
+          <button class="neural-node" type="button" data-node="ai" style="--a:-90" aria-label="AI Engineering">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">AI Engineering</span>
+          </button>
+          <button class="neural-node" type="button" data-node="full" style="--a:-30" aria-label="Full Stack">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">Full Stack</span>
+          </button>
+          <button class="neural-node" type="button" data-node="backend" style="--a:30" aria-label="Backend Systems">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">Backend Systems</span>
+          </button>
+          <button class="neural-node" type="button" data-node="mobile" style="--a:90" aria-label="Mobile Development">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">Mobile Dev</span>
+          </button>
+          <button class="neural-node" type="button" data-node="auto" style="--a:150" aria-label="Automation">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">Automation</span>
+          </button>
+          <button class="neural-node" type="button" data-node="cloud" style="--a:210" aria-label="Cloud & DevOps">
+            <span class="node-glow"></span><span class="node-dot"></span>
+            <span class="node-name">Cloud &amp; DevOps</span>
+          </button>
+        </div>
+
+        <!-- floating info panel (content injected by JS) -->
+        <aside class="neural-panel" id="neural-panel" aria-live="polite">
+          <span class="corner c-tl"></span><span class="corner c-tr"></span>
+          <span class="corner c-bl"></span><span class="corner c-br"></span>
+          <div class="np-head">
+            <span class="np-status"><i></i><span id="np-status-txt">STANDBY</span></span>
+            <h3 class="np-title" id="np-title">Neural Core Online</h3>
+            <p class="np-desc" id="np-desc">Hover a capability node to interface with that domain of my skill set.</p>
+          </div>
+          <div class="np-block">
+            <p class="np-lbl">◇ Technologies</p>
+            <div class="np-tags" id="np-tech"></div>
+          </div>
+          <div class="np-block">
+            <p class="np-lbl">◈ Related Projects</p>
+            <div class="np-tags" id="np-projects"></div>
+          </div>
+          <div class="np-block">
+            <p class="np-lbl">▤ Internships</p>
+            <div class="np-tags" id="np-intern"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> SELECTED WORK</p>
+        <h2 class="reveal" data-reveal>My <span class="ghost">projects</span></h2>
+      </div>
+      <div class="work-wrap">
+        <ul class="work-nav reveal" data-reveal id="work-nav">
+          <li class="active" data-i="0"><b>01</b><span>RetirePRO</span><i>Live · Present</i></li>
+          <li data-i="1"><b>02</b><span>ISLbridge</span><i>In Progress · Feb 2026</i></li>
+          <li data-i="2"><b>03</b><span>BotForge</span><i>Builder · Mar 2026</i></li>
+          <li data-i="3"><b>04</b><span>JARVIS</span><i>Local AI · 2024–Pres</i></li>
+          <li data-i="4"><b>05</b><span>Tunexa</span><i>Media · FastAPI</i></li>
+        </ul>
+        <div class="work-showcase reveal" data-reveal>
+          <div class="work-track" id="work-track">
+            <article class="work-slide">
+              <div class="ws-text">
+                <span class="ws-num">01 / 05</span>
+                <h3>RetirePRO</h3>
+                <p class="ws-sub">Professional Recruitment Platform</p>
+                <p>A comprehensive recruitment platform featuring resume analysis AI, file upload &amp; verification,
+                  and automated workflows.</p>
+                <ul class="tags">
+                  <li>Resume AI</li>
+                  <li>Auth</li>
+                  <li>Automation</li>
+                </ul>
+                <a class="ws-link" href="https://github.com/tusharbhatt-24/retiredpro" target="_blank"
+                  rel="noopener">GitHub Repo ↗</a>
+                <a class="ws-demo" data-demo href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+              </div>
+              <div class="ws-device"><img src="images/work/retirepro.png" alt="RetirePRO screenshot" loading="lazy" />
+              </div>
+            </article>
+            <article class="work-slide">
+              <div class="ws-text">
+                <span class="ws-num">02 / 05</span>
+                <h3>ISLbridge</h3>
+                <p class="ws-sub">Real-Time Sign Language Translator</p>
+                <p>Real-time sign language translation using ML, with an AI assistant and user progress tracking.</p>
+                <ul class="tags">
+                  <li>ML</li>
+                  <li>AI Assistant</li>
+                  <li>Tracking</li>
+                </ul>
+                <a class="ws-link" href="https://github.com/Harshguliag416/indiansignlanguage" target="_blank"
+                  rel="noopener">GitHub Repo ↗</a>
+                <a class="ws-demo" data-demo href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+              </div>
+              <div class="ws-device"><img src="images/work/ISLBridge.png" alt="ISLbridge screenshot" loading="lazy" />
+              </div>
+            </article>
+            <article class="work-slide">
+              <div class="ws-text">
+                <span class="ws-num">03 / 05</span>
+                <h3>BotForge</h3>
+                <p class="ws-sub">AI Assistant Builder for Websites</p>
+                <p>Build custom AI assistants that understand your website content — strong privacy, no data theft.</p>
+                <ul class="tags">
+                  <li>File Analysis</li>
+                  <li>Privacy</li>
+                  <li>Workflows</li>
+                </ul>
+                <a class="ws-link" href="https://github.com/tusharbhatt-24/BotForge" target="_blank"
+                  rel="noopener">GitHub Repo ↗</a>
+                <a class="ws-demo" data-demo href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+              </div>
+              <div class="ws-device"><img src="images/work/botforge.png" alt="BotForge screenshot" loading="lazy" />
+              </div>
+            </article>
+            <article class="work-slide">
+              <div class="ws-text">
+                <span class="ws-num">04 / 05</span>
+                <h3>JARVIS</h3>
+                <p class="ws-sub">Local AI Assistant</p>
+                <p>Fully offline AI assistant for Windows using Ollama, faster-whisper &amp; edge-tts. Gesture control
+                  via MediaPipe.</p>
+                <ul class="tags">
+                  <li>Ollama</li>
+                  <li>MediaPipe</li>
+                  <li>Zero Cloud</li>
+                </ul>
+                <a class="ws-link" href="https://github.com/tusharbhatt-24/jarvis" target="_blank" rel="noopener">GitHub
+                  Repo ↗</a>
+                <a class="ws-demo" data-demo href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+              </div>
+              <div class="ws-device"><img src="images/work/jarvis.png" alt="JARVIS screenshot" loading="lazy" /></div>
+            </article>
+            <article class="work-slide">
+              <div class="ws-text">
+                <span class="ws-num">05 / 05</span>
+                <h3>Tunexa</h3>
+                <p class="ws-sub">Media Downloader &amp; Playlist Sync</p>
+                <p>Download YouTube &amp; Spotify as MP3/MP4 with a glass UI. FastAPI + yt-dlp, 4K/320kbps, Spotify→YT
+                  Music OAuth transfer.</p>
+                <ul class="tags">
+                  <li>FastAPI</li>
+                  <li>yt-dlp</li>
+                  <li>OAuth</li>
+                </ul>
+                <a class="ws-link" href="https://github.com/tusharbhatt-24/tunexa" target="_blank" rel="noopener">GitHub
+                  Repo ↗</a>
+                <a class="ws-demo" data-demo href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+              </div>
+              <div class="ws-device"><img src="images/work/tunexa.png" alt="Tunexa screenshot" loading="lazy" /></div>
+            </article>
+          </div>
+          <div class="work-ctrl">
+            <button id="work-prev" aria-label="Previous">←</button>
+            <div class="work-dots" id="work-dots"></div>
+            <button id="work-next" aria-label="Next">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPOSITORIES -->
+    <section id="repos" class="section">
+      <!-- Connector: energy pulse arriving from Career Log -->
+      <div class="sec-connector" id="repo-connector" aria-hidden="true">
+        <span class="sc-line"><span class="sc-line-fill" id="sc-repo-fill"></span></span>
+        <span class="sc-pulse" id="sc-repo-pulse"></span>
+      </div>
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> FROM GITHUB</p>
+        <h2 class="reveal" data-reveal>Public <span class="ghost">repos</span></h2>
+      </div>
+      <div class="repo-grid" id="repo-grid">
+        <a class="repo reveal" data-reveal href="https://github.com/tusharbhatt-24/BotForge" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">BotForge</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">AI Assistant Builder for Websites — privacy-focused, understands your content.</p>
+          <span class="repo-lang"><i style="--c:#e34c26"></i>HTML</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#e34c26"></i>HTML</span>
+                <span class="t-pct">50%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:50%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">30%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:30%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">20%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:20%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-reveal href="https://github.com/tusharbhatt-24/jarvis" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">jarvis</span><span class="repo-star">★ 1</span></div>
+          <p class="repo-desc">Local-first AI assistant: FastAPI backend, PySide6 desktop, Flutter mobile. Real-time WS,
+            offline, privacy-first.</p>
+          <span class="repo-lang"><i style="--c:#3572A5"></i>Python</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">75%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:75%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#00B4AB"></i>Dart</span>
+                <span class="t-pct">15%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:15%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f34b7d"></i>C++</span>
+                <span class="t-pct">10%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:10%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-reveal href="https://github.com/tusharbhatt-24/tunexa" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">tunexa</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Premium media downloader &amp; Spotify↔YouTube Music playlist sync. FastAPI, yt-dlp,
+            glassmorphism UI.</p>
+          <span class="repo-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">60%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:60%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">30%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:30%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">10%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:10%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-reveal href="https://github.com/tusharbhatt-24/retiredpro" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">retiredpro</span><span class="repo-star">★ 1</span></div>
+          <p class="repo-desc">RetirePRO — professional recruitment platform with resume analysis AI.</p>
+          <span class="repo-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">80%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:80%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#e34c26"></i>HTML</span>
+                <span class="t-pct">15%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:15%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">5%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:5%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-reveal href="https://github.com/tusharbhatt-24/VoiceLegal" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">VoiceLegal</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">AI-powered legal awareness platform for India — voice queries, Hindi/English, helplines,
+            secure chat.</p>
+          <span class="repo-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">70%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:70%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">20%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:20%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#e34c26"></i>HTML</span>
+                <span class="t-pct">10%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:10%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Map-Scrapper"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Map-Scrapper</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Terminal &amp; web Google Maps scraper in Python (Playwright). Extracts businesses,
+            filters, exports CSV.</p>
+          <span class="repo-lang"><i style="--c:#3572A5"></i>Python</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">90%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:90%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#89e051"></i>Shell</span>
+                <span class="t-pct">10%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:10%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Stock-Price-Predictor"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Stock-Price-Predictor</span><span class="repo-star">★ 0</span>
+          </div>
+          <p class="repo-desc">StockVision AI — 3D stock analytics (Flask, Vanilla JS, Chart.js, yfinance, Ridge
+            Regression).</p>
+          <span class="repo-lang"><i style="--c:#e34c26"></i>HTML</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#e34c26"></i>HTML</span>
+                <span class="t-pct">40%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:40%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">35%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:35%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">25%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:25%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/movie-rating"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">movie-rating</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">CineMatch — client-side movie recommender (HTML/CSS/JS). Content-based &amp;
+            collaborative filtering, TMDB posters.</p>
+          <span class="repo-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">50%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:50%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#e34c26"></i>HTML</span>
+                <span class="t-pct">30%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:30%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">20%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:20%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Language-translator-"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Language-translator-</span><span class="repo-star">★ 0</span>
+          </div>
+          <p class="repo-desc">Lingo — cross-platform AI translation app (React, Vite, React Native, Expo). Text/speech
+            translation, offline history.</p>
+          <span class="repo-lang"><i style="--c:#3178c6"></i>TypeScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3178c6"></i>TypeScript</span>
+                <span class="t-pct">70%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:70%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">20%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:20%"></span></span>
+              </div>
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">10%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:10%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/FaceLock" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">FaceLock</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Face recognition authentication system — real-time lock/unlock via webcam.</p>
+          <span class="repo-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#f1e05a"></i>JavaScript</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Face-Detector"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Face-Detector</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Real-time face detection app built with TypeScript and modern browser APIs.</p>
+          <span class="repo-lang"><i style="--c:#3178c6"></i>TypeScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3178c6"></i>TypeScript</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/AI-TIC-TAC-TOE."
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">AI-TIC-TAC-TOE</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Tic-Tac-Toe game with an unbeatable AI opponent powered by the Minimax algorithm.</p>
+          <span class="repo-lang"><i style="--c:#3178c6"></i>TypeScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3178c6"></i>TypeScript</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Rule-Based-Chatbot"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Rule-Based-Chatbot</span><span class="repo-star">★ 0</span>
+          </div>
+          <p class="repo-desc">Python rule-based chatbot with pattern matching and context-aware responses.</p>
+          <span class="repo-lang"><i style="--c:#3572A5"></i>Python</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/expense-tracker"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">expense-tracker</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">CLI expense tracker in Python — log, categorise, and summarise your spending.</p>
+          <span class="repo-lang"><i style="--c:#3572A5"></i>Python</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/To-Do-List-CLI-Python"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">To-Do-List-CLI-Python</span><span class="repo-star">★ 0</span>
+          </div>
+          <p class="repo-desc">Terminal to-do list manager in Python — add, complete, and delete tasks from the CLI.</p>
+          <span class="repo-lang"><i style="--c:#3572A5"></i>Python</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3572A5"></i>Python</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/Event-Feedback"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">Event-Feedback</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">Event feedback collection form — styled, responsive, and accessible.</p>
+          <span class="repo-lang"><i style="--c:#563d7c"></i>CSS</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/my-portfolio"
+          target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">my-portfolio</span><span class="repo-star">★ 1</span></div>
+          <p class="repo-desc">The GitHub Pages deployment of this portfolio site.</p>
+          <span class="repo-lang"><i style="--c:#563d7c"></i>CSS</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#563d7c"></i>CSS</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="repo reveal" data-more data-reveal href="https://github.com/tusharbhatt-24/portfolio" target="_blank"
+          rel="noopener">
+          <div class="repo-top"><span class="repo-name">portfolio</span><span class="repo-star">★ 0</span></div>
+          <p class="repo-desc">My portfolio — TypeScript build with the redesign.</p>
+          <span class="repo-lang"><i style="--c:#3178c6"></i>TypeScript</span>
+          <div class="repo-stack">
+            <div class="stack-head">⚡ Tech Stack</div>
+            <div class="stack-list">
+              <div class="tech">
+                <span class="t-name"><i style="--c:#3178c6"></i>TypeScript</span>
+                <span class="t-pct">100%</span>
+                <span class="t-bar"><span class="t-fill" style="--w:100%"></span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="repo-more-wrap">
+        <button class="repo-more-btn" id="repo-more" data-magnetic>
+          See more repositories <span aria-hidden="true">↓</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section cert-vault">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> SECURE ARCHIVE</p>
+        <h2 class="reveal" data-reveal>Certifi<span class="ghost">cates</span></h2>
+        <p class="sub reveal" data-reveal>Browse verified holographic credentials inside the AI operating system.</p>
+      </div>
+
+      <!-- ===== HACKATHONS ===== -->
+      <div class="acc" data-acc="hack" style="--acc-glow:#2bf5b0">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </span>
+          <span class="acc-meta">
+            <span class="acc-name">Hackathons</span>
+            <span class="acc-count"><b data-count>2</b> credentials</span>
+          </span>
+          <span class="acc-line" aria-hidden="true"></span>
+          <span class="acc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <span class="acc-energy" aria-hidden="true"></span>
+            <div class="cert-grid">
+              <article class="cert reveal" data-reveal data-title="HackIndia" data-issuer="HackIndia National Hackathon"
+                data-date="2025" data-cat="Hackathon" data-type="Participation"
+                data-skills="Rapid Prototyping,Team Collaboration,Problem Solving" data-tech="Python,Web,AI"
+                data-img="images/certificates/hackathon/HackIndia1.jpeg"
+                data-desc="Participated in the HackIndia National Hackathon, building innovative solutions and collaborating in a competitive team environment.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/hackathon/HackIndia1.jpeg" alt="HackIndia certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Hackathon</span>
+                      <h3 class="cert-title">HackIndia</h3>
+                      <p class="cert-issuer">HackIndia National Hackathon</p>
+                      <p class="cert-date">Issued 2025</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">HackIndia</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>HackIndia National Hackathon</b></li>
+                      <li><span>Skills Learned</span><b>Rapid Prototyping · Team Collaboration</b></li>
+                      <li><span>Credential Type</span><b>Participation</b></li>
+                      <li><span>Technologies</span><b>Python · Web · AI</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="HackerRank" data-issuer="HackerRank" data-date="2025"
+                data-cat="Hackathon" data-type="Skill Certification"
+                data-skills="Algorithms,Data Structures,Problem Solving" data-tech="C++,Python"
+                data-img="images/certificates/hackathon/HackerRank.jpeg"
+                data-desc="Earned a HackerRank skill certification in algorithms and data structures, validating proficiency through timed problem-solving challenges.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/hackathon/HackerRank.jpeg" alt="HackerRank certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Hackathon</span>
+                      <h3 class="cert-title">HackerRank</h3>
+                      <p class="cert-issuer">HackerRank</p>
+                      <p class="cert-date">Issued 2025</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">HackerRank</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>HackerRank</b></li>
+                      <li><span>Skills Learned</span><b>Algorithms · Data Structures</b></li>
+                      <li><span>Credential Type</span><b>Skill Certification</b></li>
+                      <li><span>Technologies</span><b>C++ · Python</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== INTERNSHIPS ===== -->
+      <div class="acc" data-acc="intern" style="--acc-glow:#54c7ff">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="7" width="18" height="13" rx="2" />
+              <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
+            </svg>
+          </span>
+          <span class="acc-meta">
+            <span class="acc-name">Internships</span>
+            <span class="acc-count"><b data-count>3</b> credentials</span>
+          </span>
+          <span class="acc-line" aria-hidden="true"></span>
+          <span class="acc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <span class="acc-energy" aria-hidden="true"></span>
+            <div class="cert-grid">
+              <article class="cert placeholder reveal" data-reveal data-title="Full Stack Development"
+                data-issuer="Syslaan IT Solutions" data-date="2026" data-cat="Internship" data-type="Internship"
+                data-skills="React,FastAPI,REST APIs,PostgreSQL" data-tech="React,FastAPI,PostgreSQL"
+                data-img="images/certificates/internships/Tushar Bhatt Syslaan.jpg"
+                data-desc="Completed a Full Stack Development internship at Syslaan IT Solutions, building production features with React and FastAPI and integrating PostgreSQL-backed REST APIs.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/internships/Tushar Bhatt Syslaan.jpg"
+                          alt="Syslaan Internship Certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Internship</span>
+                      <h3 class="cert-title">Full Stack Development</h3>
+                      <p class="cert-issuer">Syslaan IT Solutions</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Full Stack Development</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>Syslaan IT Solutions</b></li>
+                      <li><span>Skills Learned</span><b>React · FastAPI · REST APIs</b></li>
+                      <li><span>Credential Type</span><b>Internship</b></li>
+                      <li><span>Technologies</span><b>React · FastAPI · PostgreSQL</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert placeholder reveal" data-reveal data-title="Artificial Intelligence Internship"
+                data-issuer="CodeSoft" data-date="2026" data-cat="Internship" data-type="Internship"
+                data-skills="Machine Learning,Model Evaluation,Data Analysis" data-tech="Python,ML,AI"
+                data-img="images/certificates/internships/Tushar Bhatt codesoft.jpg"
+                data-desc="Worked as an AI / ML Engineering intern at CodeSoft, training and evaluating machine-learning models and running data analysis on real datasets.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/internships/Tushar Bhatt codesoft.jpg"
+                          alt="Codesoft Internship Certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Internship</span>
+                      <h3 class="cert-title">Artificial Intelligence Internship</h3>
+                      <p class="cert-issuer">CodeSoft</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Artificial Intelligence Internship</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>CodeSoft</b></li>
+                      <li><span>Skills Learned</span><b>Machine Learning · Model Evaluation</b></li>
+                      <li><span>Credential Type</span><b>Internship</b></li>
+                      <li><span>Technologies</span><b>Python · ML · AI</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="cert placeholder reveal" data-reveal data-title="Artificial Intelligence Internship"
+                data-issuer="Pinnacle Labs" data-date="2026" data-cat="Internship" data-type="Internship"
+                data-skills="AI,Machine Learning,Data Analysis" data-tech="AI,Machine Learning,Data Analysis"
+                data-img="images/certificates/internships/Tushar Bhatt pinnacle.jpeg"
+                data-desc="Worked as a AI intern at Pinnacle Labs, training and evaluating machine-learning models and running data analysis on real datasets.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/internships/Tushar Bhatt pinnacle.jpeg"
+                          alt="Pinnacle Labs Internship Certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Internship</span>
+                      <h3 class="cert-title">Artificial Intelligence Internship</h3>
+                      <p class="cert-issuer">Pinnacle Labs</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Artificial Intelligence Internship</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>Pinnacle Labs</b></li>
+                      <li><span>Skills Learned</span><b>AI · Machine Learning · Data Analysis</b></li>
+                      <li><span>Credential Type</span><b>Internship</b></li>
+                      <li><span>Technologies</span><b>AI · Machine Learning · Data Analysis</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SKILL DEVELOPMENT ===== -->
+      <div class="acc" data-acc="skill" style="--acc-glow:#2bf5b0">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path
+                d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+              <circle cx="12" cy="12" r="3.2" />
+            </svg>
+          </span>
+          <span class="acc-meta">
+            <span class="acc-name">Skill Development</span>
+            <span class="acc-count"><b data-count>8</b> credentials</span>
+          </span>
+          <span class="acc-line" aria-hidden="true"></span>
+          <span class="acc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <span class="acc-energy" aria-hidden="true"></span>
+            <div class="cert-grid">
+              <article class="cert reveal" data-reveal data-title="AI &amp; ML" data-issuer="AI &amp; ML Certification"
+                data-date="2025" data-cat="Skill Development" data-type="Course"
+                data-skills="Neural Networks,Supervised Learning,Computer Vision" data-tech="Python,TensorFlow,PyTorch"
+                data-img="images/certificates/skill development/AI-ML.jpeg"
+                data-desc="Completed an AI &amp; ML certification covering neural networks, supervised learning and computer vision, with hands-on model building in TensorFlow and PyTorch.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/AI-ML.jpeg" alt="AI & ML certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">AI &amp; ML</h3>
+                      <p class="cert-issuer">AI &amp; ML Certification</p>
+                      <p class="cert-date">Issued 2025</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">AI &amp; ML</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>AI &amp; ML Certification</b></li>
+                      <li><span>Skills Learned</span><b>Neural Networks · Supervised Learning</b></li>
+                      <li><span>Credential Type</span><b>Course</b></li>
+                      <li><span>Technologies</span><b>Python · TensorFlow · PyTorch</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="Be10x" data-issuer="Be10x Workshop" data-date="2025"
+                data-cat="Skill Development" data-type="Workshop" data-skills="Prompt Engineering,AI Tools,Productivity"
+                data-tech="ChatGPT,AI Tooling" data-img="images/certificates/skill development/Be10x.jpeg"
+                data-desc="Attended the Be10x AI workshop, learning prompt engineering and modern AI tools to boost real-world productivity and workflow automation.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/Be10x.jpeg" alt="Be10x certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">Be10x</h3>
+                      <p class="cert-issuer">Be10x Workshop</p>
+                      <p class="cert-date">Issued 2025</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Be10x</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>Be10x Workshop</b></li>
+                      <li><span>Skills Learned</span><b>Prompt Engineering · AI Tools</b></li>
+                      <li><span>Credential Type</span><b>Workshop</b></li>
+                      <li><span>Technologies</span><b>ChatGPT · AI Tooling</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="IEEE EDS" data-issuer="IEEE Electron Devices Society"
+                data-date="2025" data-cat="Skill Development" data-type="Event"
+                data-skills="Semiconductors,Research,Technical Writing" data-tech="MATLAB,Simulink"
+                data-img="images/certificates/skill development/IEEE_EDS.jpeg"
+                data-desc="Participated in an IEEE Electron Devices Society event, exploring semiconductors and research practices with hands-on technical writing.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/IEEE_EDS.jpeg" alt="IEEE EDS certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">IEEE EDS</h3>
+                      <p class="cert-issuer">IEEE Electron Devices Society</p>
+                      <p class="cert-date">Issued 2025</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">IEEE EDS</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>IEEE Electron Devices Society</b></li>
+                      <li><span>Skills Learned</span><b>Semiconductors · Research</b></li>
+                      <li><span>Credential Type</span><b>Event</b></li>
+                      <li><span>Technologies</span><b>MATLAB · Simulink</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="Complete CSS" data-issuer="KnowledgeGate"
+                data-date="2026" data-cat="Skill Development" data-type="Course"
+                data-skills="CSS,Flexbox,Grid,Animations" data-tech="CSS,HTML"
+                data-img="images/certificates/skill development/Complete CSS.jpg"
+                data-desc="Completed the Complete CSS course on KnowledgeGate with a perfect score of 100%, mastering Flexbox, Grid, animations, and modern CSS techniques.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/Complete CSS.jpg" alt="Complete CSS certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">Complete CSS</h3>
+                      <p class="cert-issuer">KnowledgeGate</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Complete CSS</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>KnowledgeGate</b></li>
+                      <li><span>Skills Learned</span><b>CSS · Flexbox · Grid · Animations</b></li>
+                      <li><span>Credential Type</span><b>Course</b></li>
+                      <li><span>Technologies</span><b>CSS · HTML</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="Complete HTML" data-issuer="KnowledgeGate"
+                data-date="2026" data-cat="Skill Development" data-type="Course"
+                data-skills="HTML,Semantic HTML,Forms,Accessibility" data-tech="HTML"
+                data-img="images/certificates/skill development/Complete HTML (1).jpg"
+                data-desc="Completed the Complete HTML course on KnowledgeGate, mastering semantic HTML, forms, accessibility, and modern web structure best practices.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/Complete HTML (1).jpg"
+                          alt="Complete HTML certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">Complete HTML</h3>
+                      <p class="cert-issuer">KnowledgeGate</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Complete HTML</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>KnowledgeGate</b></li>
+                      <li><span>Skills Learned</span><b>HTML · Semantic HTML · Forms</b></li>
+                      <li><span>Credential Type</span><b>Course</b></li>
+                      <li><span>Technologies</span><b>HTML</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="SolidWorks Masterclass" data-issuer="HCL GUVI"
+                data-date="2026" data-cat="Skill Development" data-type="Workshop"
+                data-skills="SolidWorks,CAD,FEA,Mechanical Design" data-tech="SolidWorks,Simulink"
+                data-img="images/certificates/skill development/HCL GUVI Certification - r4qE197nW369X60T78.png"
+                data-desc="Successfully completed the SolidWorks Masterclass by HCL GUVI, gaining hands-on experience in designing, simulating, and analyzing industry-grade mechanical components including a Suspension System project.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/HCL GUVI Certification - r4qE197nW369X60T78.png"
+                          alt="HCL GUVI SolidWorks certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">SolidWorks Masterclass</h3>
+                      <p class="cert-issuer">HCL GUVI</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">SolidWorks Masterclass</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>HCL GUVI</b></li>
+                      <li><span>Skills Learned</span><b>SolidWorks · CAD · FEA</b></li>
+                      <li><span>Credential Type</span><b>Workshop</b></li>
+                      <li><span>Technologies</span><b>SolidWorks · Simulink</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="AI for Beginners" data-issuer="HP LIFE Foundation"
+                data-date="2026" data-cat="Skill Development" data-type="Course"
+                data-skills="Artificial Intelligence,AI Ethics,Business AI" data-tech="AI"
+                data-img="images/certificates/skill development/HP.jpeg"
+                data-desc="Successfully completed the HP LIFE online course &lsquo;AI for Beginners&rsquo; by HP Foundation, gaining foundational knowledge of AI concepts, business applications, and ethical implications.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/HP.jpeg" alt="HP AI for Beginners certificate"
+                          loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">AI for Beginners</h3>
+                      <p class="cert-issuer">HP LIFE Foundation</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">AI for Beginners</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>HP LIFE Foundation</b></li>
+                      <li><span>Skills Learned</span><b>AI Concepts · Ethics · Business AI</b></li>
+                      <li><span>Credential Type</span><b>Course</b></li>
+                      <li><span>Technologies</span><b>AI</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cert reveal" data-reveal data-title="Python Programming" data-issuer="Beep Learning"
+                data-date="2026" data-cat="Skill Development" data-type="Course"
+                data-skills="Python,Programming,Problem Solving" data-tech="Python"
+                data-img="images/certificates/skill development/python certificate.jpeg"
+                data-desc="Earned a Certificate of Excellence from Beep Learning for successfully completing Python Programming and passing the skill test, recognised by 5000+ companies.">
+                <div class="cert-inner">
+                  <div class="cert-face cert-front">
+                    <div class="cert-media">
+                      <div class="holo">
+                        <div class="holo-scan" aria-hidden="true"></div>
+                        <div class="holo-shine" aria-hidden="true"></div>
+                        <div class="holo-hud" aria-hidden="true"></div>
+                        <span class="holo-particle p1"></span><span class="holo-particle p2"></span><span
+                          class="holo-particle p3"></span>
+                        <img src="images/certificates/skill development/python certificate.jpeg"
+                          alt="Python Programming certificate" loading="lazy" />
+                      </div>
+                      <span class="cert-corner tl"></span><span class="cert-corner tr"></span>
+                      <span class="cert-corner bl"></span><span class="cert-corner br"></span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-info">
+                      <span class="cert-badge">Skill Development</span>
+                      <h3 class="cert-title">Python Programming</h3>
+                      <p class="cert-issuer">Beep Learning</p>
+                      <p class="cert-date">Issued 2026</p>
+                    </div>
+                  </div>
+                  <div class="cert-face cert-back">
+                    <div class="back-grid" aria-hidden="true"></div>
+                    <div class="back-head">
+                      <span class="back-tag">AI INFO PANEL</span>
+                      <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+                    </div>
+                    <h3 class="cert-title">Python Programming</h3>
+                    <ul class="back-rows">
+                      <li><span>Issuer</span><b>Beep Learning</b></li>
+                      <li><span>Skills Learned</span><b>Python · Problem Solving</b></li>
+                      <li><span>Credential Type</span><b>Course</b></li>
+                      <li><span>Technologies</span><b>Python</b></li>
+                      <li><span>Status</span><b class="ok">VERIFIED</b></li>
+                    </ul>
+                    <div class="back-actions">
+                      <button class="b-btn view" type="button">View Certificate</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-head">
+        <p class="eyebrow reveal" data-reveal><span class="line-h"></span> GET IN TOUCH</p>
+        <h2 class="reveal" data-reveal>Contact <span class="ghost">me</span></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-cta reveal" data-reveal>
+          <p class="cta-label">Available for opportunities</p>
+          <h3>Let's build something <mark>extraordinary</mark></h3>
+          <p class="cta-sub">Open to full-time roles, freelance projects, internships &amp; collaborations.</p>
+          <div class="contact-direct">
+            <a class="direct" href="mailto:bhatttushar2006@gmail.com" data-magnetic>
+              <span aria-hidden="true">✉</span> bhatttushar2006@gmail.com
+            </a>
+            <a class="direct" href="https://wa.me/+919650227051" target="_blank" rel="noopener" data-magnetic>
+              <span aria-hidden="true">▦</span> +91 96502 27051
+            </a>
+          </div>
+        </div>
+        <aside class="contact-meta reveal" data-reveal>
+          <div class="meta-row"><span>Edu</span><b>B.Tech CSE</b><i>AKTU · 2024–28</i></div>
+          <div class="meta-row"><span>Loc</span><b>New Delhi</b><i>India · UTC+5:30</i></div>
+          <div class="meta-row"><span>Status</span><b class="live">Open to work</b><i>2026 grads</i></div>
+          <div class="socials">
+            <a href="https://github.com/tusharbhatt-24" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+            <a href="https://www.linkedin.com/in/tusharbhatt24/" target="_blank" rel="noopener"
+              aria-label="LinkedIn">IN</a>
+            <a href="https://www.instagram.com/tushar__bhatt/" target="_blank" rel="noopener"
+              aria-label="Instagram">IG</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Section progress indicator -->
+  <nav class="progress-dots" id="progress-dots" aria-label="Section navigation">
+    <a href="#home" data-sec="home" class="pd-dot"><span class="pd-num">01</span><span class="pd-label">Home</span></a>
+    <a href="#about" data-sec="about" class="pd-dot"><span class="pd-num">02</span><span
+        class="pd-label">About</span></a>
+    <a href="#skills" data-sec="skills" class="pd-dot"><span class="pd-num">03</span><span
+        class="pd-label">Expertise</span></a>
+    <a href="#work" data-sec="work" class="pd-dot"><span class="pd-num">04</span><span class="pd-label">Work</span></a>
+    <a href="#repos" data-sec="repos" class="pd-dot"><span class="pd-num">05</span><span
+        class="pd-label">Repos</span></a>
+    <a href="#experience" data-sec="experience" class="pd-dot"><span class="pd-num">06</span><span
+        class="pd-label">Journey</span></a>
+    <a href="#certificates" data-sec="certificates" class="pd-dot"><span class="pd-num">07</span><span
+        class="pd-label">Certs</span></a>
+    <a href="#contact" data-sec="contact" class="pd-dot"><span class="pd-num">08</span><span
+        class="pd-label">Contact</span></a>
+  </nav>
+
+  <footer class="footer">
+    <span>© 2026 Tushar Bhatt</span>
+    <span class="footer-mid">Built with precision • Every detail matters</span>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+
+  <!-- Scroll velocity HUD readout -->
+  <div class="hud-vel" id="hud-vel" aria-hidden="true">
+    <span class="hv-label">SCROLL</span>
+    <span class="hv-bar"><i id="hv-fill"></i></span>
+    <span class="hv-val" id="hv-val">0</span>
+  </div>
+
+  <!-- Certificate view modal -->
+  <div class="cert-modal" id="cert-modal" aria-hidden="true">
+    <div class="cm-backdrop" data-close></div>
+    <div class="cm-stage" role="dialog" aria-modal="true" aria-label="Certificate showcase">
+      <button class="cm-close" type="button" data-close aria-label="Close">✕</button>
+      <div class="cm-frame">
+        <!-- LEFT 45%: certificate preview -->
+        <div class="cm-show" id="cm-show">
+          <div class="cm-imgwrap" id="cm-imgwrap">
+            <img id="cm-img" src="" alt="Certificate preview" />
+            <span class="cert-verify"><i class="vd"></i> VERIFIED</span>
+          </div>
+        </div>
+        <!-- RIGHT 55%: certificate details -->
+        <div class="cm-info" id="cm-info">
+          <span class="cert-badge" id="cm-badge">Certificate</span>
+          <h3 id="cm-title">Certificate</h3>
+          <div class="cm-rows">
+            <div class="cm-row"><span>Issued by</span><b id="cm-issuer">Issuer</b></div>
+            <div class="cm-row"><span>Date</span><b id="cm-date">—</b></div>
+            <div class="cm-row"><span>Status</span><b class="ok" id="cm-status">✓ Verified</b></div>
+          </div>
+          <p class="cm-desc" id="cm-desc"></p>
+          <div class="cm-skills">
+            <span class="cm-skills-label">Skills</span>
+            <div class="cm-skill-tags" id="cm-skills"></div>
+          </div>
+          <button class="b-btn close-btn" type="button" data-close>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+
 </html>
